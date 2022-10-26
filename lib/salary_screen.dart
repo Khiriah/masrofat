@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'masrofat_screen.dart';
 import 'custom/constance.dart';
 import 'home_screen.dart';
 
@@ -75,7 +75,25 @@ class _SalaryScreenState extends State<SalaryScreen> {
         ),
         body: Center(
           child: Center(
-            child: Column(children: [Text('')]),
+            child: Column(children: [
+              Text('راتبك الشهري  : ${widget.sal}'),
+              Container(
+                child: Row(
+                  children: [
+                    TextButton(onPressed: () {}, child: Text('مدخرات')),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) => MasrofatScreen()),
+                          );
+                        },
+                        child: Text('مصروفات')),
+                    TextButton(onPressed: () {}, child: Text('إلتزامات'))
+                  ],
+                ),
+              )
+            ]),
           ),
         ));
   }
