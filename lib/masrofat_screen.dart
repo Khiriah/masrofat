@@ -31,13 +31,12 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
               color: Colors.white,
             )),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked, //specify the location of the FAB
+      floatingActionButtonLocation: FloatingActionButtonLocation
+          .centerDocked, //specify the location of the FAB
       floatingActionButton: FloatingActionButton(
         backgroundColor: primaryColor,
         onPressed: () {
-          setState(() {
-
-          });
+          setState(() {});
         },
         tooltip: "Centre FAB",
         child: Container(
@@ -56,9 +55,7 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               IconButton(
-                onPressed: () {
-
-                },
+                onPressed: () {},
                 iconSize: 27.0,
                 icon: Icon(
                   Icons.home,
@@ -66,7 +63,6 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
                   color: primaryColor,
                 ),
               ),
-
               SizedBox(
                 width: 50.0,
               ),
