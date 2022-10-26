@@ -25,9 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45)),
         backgroundColor: primaryColor,
-        elevation: 0.0,
         leading: GestureDetector(
             onTap: () {
               Navigator.push(
@@ -37,10 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               );
             },
-            child: Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-            )),
+            ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation
           .centerDocked, //specify the location of the FAB
@@ -51,11 +47,11 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         tooltip: "Centre FAB",
         child: Container(
-          margin: EdgeInsets.all(15.0),
+          margin: EdgeInsets.all(0.0),
           child: Icon(Icons.add),
           color: primaryColor,
         ),
-        elevation: 4.0,
+        // elevation: 4.0,
       ),
 
       bottomNavigationBar: BottomAppBar(
@@ -86,12 +82,31 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Container(
         child: Column(children: [
           Container(
+            padding: EdgeInsets.only(top: 100,left: 50,right: 50),
+              alignment: Alignment.center,
               child: TextField(
             controller: _salary,
-            decoration: InputDecoration(labelText: 'please enter your salary:'),
+            decoration: InputDecoration(labelText: 'ادخل راتبك :',
+
+                    fillColor: Colors.white,
+                    filled: false,
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 1.0, horizontal: 10),
+            ),
             keyboardType: TextInputType.number,
           )),
+          SizedBox(height: 50,),
           ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)
+              ),
+              padding: const EdgeInsets.all(18),
+              foregroundColor: Theme.of(context).colorScheme.onPrimary,
+              backgroundColor: primaryColor,
+            ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)),
+
+            
             onPressed: () async {
               Navigator.of(context).push(
                 MaterialPageRoute(
@@ -99,6 +114,8 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             },
             child: Text('enter'),
+
+            
           ),
           Column(
             children: <Widget>[

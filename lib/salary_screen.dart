@@ -15,23 +15,18 @@ class _SalaryScreenState extends State<SalaryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45)),
           backgroundColor: primaryColor,
-          elevation: 0.0,
           leading: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => HomeScreen(),
-                  ),
-                );
-              },
-              child: Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-              )),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomeScreen(),
+                ),
+              );
+            },
+          ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation
             .centerDocked, //specify the location of the FAB

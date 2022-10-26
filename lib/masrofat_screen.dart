@@ -14,9 +14,8 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45)),
         backgroundColor: primaryColor,
-        elevation: 0.0,
         leading: GestureDetector(
             onTap: () {
               Navigator.push(
