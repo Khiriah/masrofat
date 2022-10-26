@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:masrofat/eltezamat_screen.dart';
 import 'package:masrofat/home_screen.dart';
-import 'package:masrofat/salary_screen.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +19,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          body: SalaryScreen()
+          body: HomeScreen()
       ),
     );
   }

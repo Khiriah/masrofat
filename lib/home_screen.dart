@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:masrofat/custom/custom_button.dart';
-import 'package:masrofat/custom/custom_text.dart';
-import 'package:masrofat/salary_screen.dart';
+import 'custom/constance.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -14,40 +13,69 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.yellow,
-          elevation: 0.0,
-          leading: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SalaryScreen(),
-                  ),);
-              },
+      appBar: AppBar(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+        backgroundColor: primaryColor,
+        elevation: 0.0,
+        leading: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomeScreen(),
+                ),
+              );
+            },
+            child: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            )),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked, //specify the location of the FAB
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: primaryColor,
+        onPressed: () {
+          setState(() {
 
-              child: Icon(
-                Icons.arrow_back,
-                color: Colors.black,
-
-              )),
+          });
+        },
+        tooltip: "Centre FAB",
+        child: Container(
+          margin: EdgeInsets.all(15.0),
+          child: Icon(Icons.add),
+          color: primaryColor,
         ),
-        body: Padding(
+        elevation: 4.0,
+      ),
 
-        padding: const EdgeInsets.only(top: 50, right: 20, left: 20),
-    child: Column(children: [
+      bottomNavigationBar: BottomAppBar(
+        child: Container(
+          margin: EdgeInsets.only(left: 12.0, right: 12.0),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              IconButton(
+                onPressed: () {
 
-    Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
+                },
+                iconSize: 27.0,
+                icon: Icon(
+                    Icons.home,
+                    //darken the icon if it is selected or else give it a different color
+                    color: primaryColor,
+                ),
+              ),
 
-
-
-
-      ]
-    ),
-      ]  )
-    ),
+              SizedBox(
+                width: 50.0,
+              ),
+            ],
+          ),
+        ),
+        shape: CircularNotchedRectangle(),
+          color: primaryColor,
+      ),
     );
   }
 }
