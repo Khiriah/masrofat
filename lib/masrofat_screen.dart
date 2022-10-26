@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:masrofat/custom/constance.dart';
 import 'package:masrofat/home_screen.dart';
+import 'package:masrofat/salary_screen.dart';
 
 class MasrofatScreen extends StatefulWidget {
   const MasrofatScreen({Key? key}) : super(key: key);
@@ -21,7 +22,7 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
+                  builder: (context) => SalaryScreen1(sal: '',),
                 ),
               );
             },
@@ -59,7 +60,7 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
                 icon: Icon(
                   Icons.home,
                   //darken the icon if it is selected or else give it a different color
-                  color: primaryColor,
+                  color: primaryColor1,
                 ),
               ),
               SizedBox(
@@ -69,7 +70,7 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
           ),
         ),
         shape: CircularNotchedRectangle(),
-        color: primaryColor,
+        color: primaryColor1,
       ),
     );
   }

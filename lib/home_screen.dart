@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:masrofat/eltezamat_screen.dart';
 import 'package:masrofat/salary_screen.dart';
 import 'custom/constance.dart';
 
@@ -32,53 +31,15 @@ class _HomeScreenState extends State<HomeScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
+                  builder: (context) => SalaryScreen1(sal: 'll',),
                 ),
               );
             },
             ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation
-          .centerDocked, //specify the location of the FAB
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: primaryColor,
-        onPressed: () {
-          setState(() {});
-        },
-        tooltip: "Centre FAB",
-        child: Container(
-          margin: EdgeInsets.all(0.0),
-          child: Icon(Icons.add),
-          color: primaryColor,
-        ),
-        // elevation: 4.0,
-      ),
 
-      bottomNavigationBar: BottomAppBar(
-        child: Container(
-          margin: EdgeInsets.only(left: 12.0, right: 12.0),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              IconButton(
-                onPressed: () {},
-                iconSize: 27.0,
-                icon: Icon(
-                  Icons.home,
-                  //darken the icon if it is selected or else give it a different color
-                  color: primaryColor,
-                ),
-              ),
-              SizedBox(
-                width: 50.0,
-              ),
-            ],
-          ),
-        ),
-        shape: CircularNotchedRectangle(),
-        color: primaryColor,
-      ),
+
+
       body: Container(
         child: Column(children: [
           Container(
@@ -110,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () async {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                    builder: (context) => SalaryScreen(sal: _salary.text)),
+                    builder: (context) => SalaryScreen1(sal: _salary.text)),
               );
             },
             child: Text('enter'),

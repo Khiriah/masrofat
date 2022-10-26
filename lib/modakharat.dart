@@ -1,20 +1,20 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:masrofat/home_screen.dart';
-import 'package:masrofat/salary_screen.dart';
 
 import 'custom/constance.dart';
+import 'home_screen.dart';
 
-class EltezamtScreen extends StatefulWidget {
-  const EltezamtScreen({Key? key}) : super(key: key);
+class ModkharatScreen extends StatefulWidget {
+  const ModkharatScreen({Key? key}) : super(key: key);
 
   @override
-  State<EltezamtScreen> createState() => _EltezamtScreenState();
+  State<ModkharatScreen> createState() => _ModkharatScreenState();
 }
 
-class _EltezamtScreenState extends State<EltezamtScreen> {
+class _ModkharatScreenState extends State<ModkharatScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
       appBar: AppBar(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45)),
         backgroundColor: primaryColor,
@@ -80,3 +80,4 @@ class _EltezamtScreenState extends State<EltezamtScreen> {
     );
   }
 }
+
