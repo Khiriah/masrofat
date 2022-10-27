@@ -81,23 +81,21 @@
 import 'package:flutter/material.dart';
 import 'package:masrofat/home_screen.dart';
 import 'package:masrofat/salary_screen.dart';
+import 'package:get/get.dart';
 
 import 'custom/constance.dart';
 
 class EltezamtScreen extends StatefulWidget {
   String sal;
-  EltezamtScreen({
-    Key? key,
-    required this.sal,
-  }) : super(key: key);
+  var r;
+
+  EltezamtScreen({Key? key, required this.sal, this.r}) : super(key: key);
 
   @override
   State<EltezamtScreen> createState() => _EltezamtScreenState();
 }
 
 class _EltezamtScreenState extends State<EltezamtScreen> {
-  var r;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,6 +110,7 @@ class _EltezamtScreenState extends State<EltezamtScreen> {
                 MaterialPageRoute(
                   builder: (context) => SalaryScreen1(
                     sal: widget.sal,
+                    total: widget.r,
                   ),
                 ),
               );
@@ -164,8 +163,8 @@ class _EltezamtScreenState extends State<EltezamtScreen> {
       ),
 
       body: Container(
-          child:
-              Text('الحد المسموح للإلتزامات ${r = int.parse(widget.sal) / 2}')),
+          child: Text(
+              'الحد المسموح للإلتزامات ${this.widget.r = int.parse(widget.sal) / 2}')),
     );
   }
 }

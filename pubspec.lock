@@ -37,7 +37,7 @@ packages:
     source: hosted
     version: "0.12.0"
   charts_flutter:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: charts_flutter
       url: "https://pub.dartlang.org"
@@ -71,6 +71,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
+  d_chart:
+    dependency: "direct main"
+    description:
+      name: d_chart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.0"
   fake_async:
     dependency: transitive
     description:
@@ -95,6 +102,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  get:
+    dependency: "direct main"
+    description:
+      name: get
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.6.5"
   intl:
     dependency: transitive
     description:
@@ -151,6 +165,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.2"
+  percent_indicator:
+    dependency: "direct main"
+    description:
+      name: percent_indicator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.2.2"
+  pie_chart:
+    dependency: "direct main"
+    description:
+      name: pie_chart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.3.2"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -184,20 +212,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.1"
-  syncfusion_flutter_charts:
-    dependency: "direct main"
-    description:
-      name: syncfusion_flutter_charts
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "20.3.52"
-  syncfusion_flutter_core:
-    dependency: transitive
-    description:
-      name: syncfusion_flutter_core
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "20.3.52"
   term_glyph:
     dependency: transitive
     description:

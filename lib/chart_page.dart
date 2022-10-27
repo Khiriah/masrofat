@@ -1,6 +1,8 @@
+// ignore: implementation_imports
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
+// ignore: camel_case_types
 class chartScreen extends StatefulWidget {
   chartScreen(this.xData, this.yData, this.text);
   final String xData;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:masrofat/salary_screen.dart';
 import 'custom/constance.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -27,56 +28,52 @@ class _HomeScreenState extends State<HomeScreen> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45)),
         backgroundColor: primaryColor,
         leading: GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => SalaryScreen1(sal: 'll',),
-                ),
-              );
-            },
-            ),
+          onTap: () {
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(
+            //     builder: (context) => SalaryScreen1(sal: 'll',),
+            //   ),
+            // );
+            print('ggggg hhhhhhiiii');
+            Get.to(SalaryScreen1);
+          },
+        ),
       ),
-
-
-
       body: Container(
         child: Column(children: [
           Container(
-            padding: EdgeInsets.only(top: 100,left: 50,right: 50),
+              padding: EdgeInsets.only(top: 100, left: 50, right: 50),
               alignment: Alignment.center,
               child: TextField(
-            controller: _salary,
-            decoration: InputDecoration(labelText: 'ادخل راتبك :',
-
-                    fillColor: Colors.white,
-                    filled: false,
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 1.0, horizontal: 10),
-            ),
-            keyboardType: TextInputType.number,
-          )),
-          SizedBox(height: 50,),
+                controller: _salary,
+                decoration: InputDecoration(
+                  labelText: 'ادخل راتبك :',
+                  fillColor: Colors.white,
+                  filled: false,
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 1.0, horizontal: 10),
+                ),
+                keyboardType: TextInputType.number,
+              )),
+          SizedBox(
+            height: 50,
+          ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)
-              ),
+                  borderRadius: BorderRadius.circular(10)),
               padding: const EdgeInsets.all(18),
               foregroundColor: Theme.of(context).colorScheme.onPrimary,
               backgroundColor: primaryColor,
             ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)),
-
-            
             onPressed: () async {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                    builder: (context) => SalaryScreen1(sal: _salary.text)),
-              );
+              // Navigator.of(context).push(
+              //   MaterialPageRoute(
+              //       builder: (context) => SalaryScreen1(sal: _salary.text)),
+              Get.to(SalaryScreen1(sal: _salary.text));
             },
             child: Text('enter'),
-
-            
           ),
           Column(
             children: <Widget>[
