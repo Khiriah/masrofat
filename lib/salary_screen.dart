@@ -5,7 +5,7 @@ import 'masrofat_screen.dart';
 import 'custom/constance.dart';
 import 'home_screen.dart';
 // import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:syncfusion_flutter_charts/charts.dart';
+
 import 'chart_page.dart';
 
 class SalaryScreen1 extends StatefulWidget {
@@ -17,7 +17,7 @@ class SalaryScreen1 extends StatefulWidget {
 
 class _SalaryScreen1State extends State<SalaryScreen1> {
   late List<chartScreen> data;
-  late TooltipBehavior _tooltip;
+
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +72,7 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                             builder: (context) => ModkharatScreen(
-                                  sal: widget.sal,
+                                 sal: widget.sal,
                                 )),
                       );
                     },

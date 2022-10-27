@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:masrofat/custom/constance.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -10,6 +11,8 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      color: primaryColor1,
+    );
   }
 }
