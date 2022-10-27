@@ -4,13 +4,20 @@ import 'package:masrofat/home_screen.dart';
 import 'package:masrofat/salary_screen.dart';
 
 class MasrofatScreen extends StatefulWidget {
-  const MasrofatScreen({Key? key}) : super(key: key);
+  String sal;
+
+  // const MasrofatScreen({Key? key}) : super(key: key);
+  MasrofatScreen({
+    Key? key,
+    required this.sal,
+  }) : super(key: key);
 
   @override
   State<MasrofatScreen> createState() => _MasrofatScreenState();
 }
 
 class _MasrofatScreenState extends State<MasrofatScreen> {
+  var m;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +29,9 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => SalaryScreen1(sal: '',),
+                  builder: (context) => SalaryScreen1(
+                    sal: widget.sal,
+                  ),
                 ),
               );
             },
@@ -72,6 +81,9 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
         shape: CircularNotchedRectangle(),
         color: primaryColor1,
       ),
+      body: Container(
+          child: Text(
+              'الحد المسموح للمصروفات ${m = int.parse(widget.sal) * 30 / 100}')),
     );
   }
 }

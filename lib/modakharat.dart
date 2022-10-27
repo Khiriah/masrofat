@@ -1,11 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:masrofat/salary_screen.dart';
 
 import 'custom/constance.dart';
 import 'home_screen.dart';
 
 class ModkharatScreen extends StatefulWidget {
-  const ModkharatScreen({Key? key}) : super(key: key);
+  String sal;
+  ModkharatScreen({
+    Key? key,
+    required this.sal,
+  }) : super(key: key);
 
   @override
   State<ModkharatScreen> createState() => _ModkharatScreenState();
@@ -14,7 +19,8 @@ class ModkharatScreen extends StatefulWidget {
 class _ModkharatScreenState extends State<ModkharatScreen> {
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    var mod;
+    return Scaffold(
       appBar: AppBar(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45)),
         backgroundColor: primaryColor,
@@ -23,7 +29,9 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
+                  builder: (context) => SalaryScreen1(
+                    sal: widget.sal,
+                  ),
                 ),
               );
             },
@@ -32,13 +40,12 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
               color: Colors.white,
             )),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked, //specify the location of the FAB
+      floatingActionButtonLocation: FloatingActionButtonLocation
+          .centerDocked, //specify the location of the FAB
       floatingActionButton: FloatingActionButton(
         backgroundColor: primaryColor,
         onPressed: () {
-          setState(() {
-
-          });
+          setState(() {});
         },
         tooltip: "Centre FAB",
         child: Container(
@@ -57,9 +64,7 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               IconButton(
-                onPressed: () {
-
-                },
+                onPressed: () {},
                 iconSize: 27.0,
                 icon: Icon(
                   Icons.home,
@@ -67,7 +72,6 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                   color: primaryColor1,
                 ),
               ),
-
               SizedBox(
                 width: 50.0,
               ),
@@ -77,7 +81,9 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
         shape: CircularNotchedRectangle(),
         color: primaryColor1,
       ),
+      body: Container(
+          child: Text(
+              'الحد المسموح للمدخرات ${mod = int.parse(widget.sal) * 20 / 100}')),
     );
   }
 }
-
