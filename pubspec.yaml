@@ -41,6 +41,7 @@ dependencies:
   get: ^4.6.5
   percent_indicator: ^4.2.2
   shared_preferences: ^2.0.15
+  localstorage: ^4.0.0+1
   
   
     
@@ -55,7 +56,6 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
-  lottie: ^1.4.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

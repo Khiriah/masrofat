@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:masrofat/custom/constance.dart';
 import 'package:masrofat/home_screen.dart';
 import 'package:masrofat/salary_screen.dart';
+import 'package:localstorage/localstorage.dart';
 
 class MasrofatScreen extends StatefulWidget {
   String sal;
@@ -16,6 +16,8 @@ class MasrofatScreen extends StatefulWidget {
 }
 
 class _MasrofatScreenState extends State<MasrofatScreen> {
+  final LocalStorage storage = new LocalStorage('some_key');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

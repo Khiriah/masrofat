@@ -1,9 +1,9 @@
-
-import 'dart:html';
+// import 'dart:html';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:masrofat/custom/custom_text.dart';
+import 'package:masrofat/salary_screen.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,7 +15,7 @@ import 'home_screen.dart';
 class ModkharatScreen extends StatefulWidget {
   String sal;
   var m;
-  var mm =100;
+  var mm = 100;
 
   ModkharatScreen({Key? key, required this.sal}) : super(key: key);
   @override
@@ -44,8 +44,6 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
   //   });
   // }
   // String getData="";
-
-
 
   void _add(BuildContext context, String modakharat) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -79,12 +77,9 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
       });
     }
 
-
     return Scaffold(
-
         appBar: AppBar(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
           backgroundColor: primaryColor,
           elevation: 0.0,
           leading: GestureDetector(
@@ -92,7 +87,8 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => HomeScreen(),
+                    builder: (context) =>
+                        SalaryScreen1(sal: widget.sal, masraf: widget.m),
                   ),
                 );
               },
@@ -122,9 +118,7 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                                 hintText: " ",
                                 border: UnderlineInputBorder(),
                                 labelText: 'سبب الادخار'),
-                            onChanged: (String value) {
-
-                            },
+                            onChanged: (String value) {},
                           ),
                           // TextFormField(
                           //   controller: _amuntController,
@@ -146,7 +140,7 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                       TextButton(
                         onPressed: () {
                           setState(() {
-                            var reason=_reasonController.text;
+                            var reason = _reasonController.text;
                             if (reason.isEmpty) {
                               showDialog(
                                   context: context,
@@ -163,12 +157,16 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                                           fontSize: 22,
                                         ),
                                       ),
-
                                     );
                                   });
                             } else {
-                              print(reason,);
-                              _add(context, reason,);
+                              print(
+                                reason,
+                              );
+                              _add(
+                                context,
+                                reason,
+                              );
                               Navigator.pop(context);
                             }
                           });
@@ -212,63 +210,59 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
           shape: CircularNotchedRectangle(),
           color: primaryColor1,
         ),
-        body:
-        Stack(
-          children: <Widget>[
-            Container(
-              width: 1000,
-              height: 80,
-          color: primaryColor,
-
-            ),
-        Column(children: [
-          Card(
-              margin: const EdgeInsets.only(
-                  top: 50, left: 60, right: 60, bottom: 50),
-
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              child: Column(children: [
-                Row(children: [
-                  CustomButtonSocial(
-                    text: 'مدخراتي',
-                    imageName: 'assets/images/Icon.png',
-                    onPress: () {},
-                  ),
-                  SizedBox(
-                    width: 150,
-                  ),
-                  Container(
-                      child: CustomText(
-                    text: (
-                        ' ${this.widget.m = int.parse(widget.sal) * 20 / 100}'
+        body: Stack(children: <Widget>[
+          Container(
+            width: 1000,
+            height: 80,
+            color: primaryColor,
+          ),
+          Column(children: [
+            Card(
+                margin: const EdgeInsets.only(
+                    top: 50, left: 60, right: 60, bottom: 50),
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                child: Column(children: [
+                  Row(children: [
+                    CustomButtonSocial(
+                      text: 'مدخراتي',
+                      imageName: 'assets/images/Icon.png',
+                      onPress: () {},
                     ),
-                  ))
-                ]),
-                Row(children: [
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Container(
-                      child: CustomText(
-                    text: ("المتبقي من المدخرات "),
-                  )),
-                  SizedBox(
-                    width: 150,
-                  ),
-                  Container(
-                      child: CustomText(
-                    text: (  ' ${this.widget.m = int.parse(widget.sal) * 20 / 100 }'),
-                  ))
-                ]),
-              ])),
-          ListView.builder(
-              // return ListView.builder(
-              shrinkWrap: true,
-              itemCount: modakharat1.length,
-              itemBuilder: (BuildContext context, int position) {
-                return  Card(
+                    SizedBox(
+                      width: 150,
+                    ),
+                    Container(
+                        child: CustomText(
+                      text:
+                          (' ${this.widget.m = int.parse(widget.sal) * 20 / 100}'),
+                    ))
+                  ]),
+                  Row(children: [
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Container(
+                        child: CustomText(
+                      text: ("المتبقي من المدخرات "),
+                    )),
+                    SizedBox(
+                      width: 150,
+                    ),
+                    Container(
+                        child: CustomText(
+                      text:
+                          (' ${this.widget.m = int.parse(widget.sal) * 20 / 100}'),
+                    ))
+                  ]),
+                ])),
+            ListView.builder(
+                // return ListView.builder(
+                shrinkWrap: true,
+                itemCount: modakharat1.length,
+                itemBuilder: (BuildContext context, int position) {
+                  return Card(
                     margin: const EdgeInsets.all(8),
                     elevation: 2.4,
                     shape: RoundedRectangleBorder(
@@ -290,8 +284,8 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                           circularStrokeCap: CircularStrokeCap.round,
                         ),
                       ),
-                      title: Text( modakharat1[position]),
-                    // subtitle: Text(modakharat1[position]),
+                      title: Text(modakharat1[position]),
+                      // subtitle: Text(modakharat1[position]),
                       trailing: IconButton(
                         icon: const Icon(
                           Icons.delete,
@@ -304,10 +298,10 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                         },
                       ),
                     ),
-
-                );
-              })
-        ])]));
+                  );
+                })
+          ])
+        ]));
   }
 }
 
