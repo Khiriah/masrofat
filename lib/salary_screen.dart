@@ -31,8 +31,9 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
         backgroundColor: primaryColor,
+        elevation: 0.0,
         leading: GestureDetector(
           onTap: () {
             Navigator.push(
@@ -44,8 +45,16 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
           },
         ),
       ),
-      body: Column(
-        children: [
+      body:
+      Stack(
+        children: <Widget>[
+          Container(
+            width: 1000,
+            height: 80,
+            color: primaryColor,
+
+          ),
+          Column(children: [
           Container(
             alignment: Alignment.center,
             margin: EdgeInsets.all(20),
@@ -98,7 +107,8 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
                         spreadRadius: 3,
                       )
                     ]),
-                child: Column(children: [
+                child: Column(
+                    children: [
                   Icon(
                     Icons.control_point_sharp,
                     color: Colors.grey,
@@ -151,7 +161,8 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
               ),
               Container(
                 alignment: Alignment.center,
-                margin: EdgeInsets.all(15),
+                margin: const EdgeInsets.only(
+                    top: 50, left: 60, right: 60, bottom: 50),
                 height: 90,
                 decoration: BoxDecoration(
                     color: Colors.white,
@@ -272,6 +283,6 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
           )
         ],
       ),
-    );
+    ]));
   }
 }

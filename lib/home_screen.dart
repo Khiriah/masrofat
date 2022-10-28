@@ -25,7 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+        elevation: 0.0,
         backgroundColor: primaryColor,
         leading: GestureDetector(
           onTap: () {
@@ -41,9 +42,16 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: Container(
+
         child: Column(children: [
           Container(
-              padding: EdgeInsets.only(top: 100, left: 50, right: 50),
+            width: 1000,
+            height: 80,
+            color: primaryColor,
+          ),
+          Container(
+
+              padding: EdgeInsets.only(top: 200, left: 50, right: 50),
               alignment: Alignment.center,
               child: TextField(
                 controller: _salary,

@@ -23,7 +23,7 @@ class CustomButtonSocial extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10)),
             padding: const EdgeInsets.all(18),
             foregroundColor: Theme.of(context).colorScheme.onPrimary,
-            backgroundColor: Colors.grey.shade200,
+            backgroundColor: Colors.white,
           ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)),
           onPressed: () {},
           // onPressed,

@@ -1,264 +1,3 @@
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-// import 'package:masrofat/salary_screen.dart';
-// import 'custom/constance.dart';
-// import 'custom/custom_buttom_social.dart';
-// import 'custom/custom_text.dart';
-// import 'home_screen.dart';
-//
-// class ModkharatScreen extends StatefulWidget {
-//   String sal;
-//   var mod;
-//
-//   ModkharatScreen({Key? key, required this.sal, this.mod}) : super(key: key);
-//
-//   @override
-//   State<ModkharatScreen> createState() => _ModkharatScreenState();
-// }
-//
-// class _ModkharatScreenState extends State<ModkharatScreen> {
-//   final _amuntController = TextEditingController();
-//   final _reasonController = TextEditingController();
-//   var titel = 1;
-//
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45)),
-//         backgroundColor: primaryColor,
-//         leading: GestureDetector(
-//             onTap: () {
-//               Navigator.push(
-//                 context,
-//                 MaterialPageRoute(
-//                   builder: (context) => SalaryScreen1(
-//                     sal: widget.sal,
-//                     mod: widget.mod,
-//                   ),
-//                 ),
-//               );
-//               print('mddddddddodddd ${widget.mod}');
-//             },
-//             child: Icon(
-//               Icons.arrow_back,
-//               color: Colors.white,
-//             )),
-//       ),
-//       floatingActionButtonLocation: FloatingActionButtonLocation
-//           .centerDocked, //specify the location of the FAB
-//       floatingActionButton: FloatingActionButton(
-//         backgroundColor: primaryColor,
-//         onPressed: () {
-//             showDialog(
-//                 context: context,
-//                 builder: (BuildContext context) {
-//                   return AlertDialog(
-//                     shape: RoundedRectangleBorder(
-//                         borderRadius: BorderRadius.circular(20)),
-//                     content: Column(
-//                         mainAxisSize: MainAxisSize.min,
-//                         crossAxisAlignment: CrossAxisAlignment.start,
-//                         children: [
-//                           TextFormField(
-//                             controller: _reasonController,
-//                             decoration: InputDecoration(
-//                                 border: UnderlineInputBorder(),
-//                                 labelText: 'reason'),
-//                             onChanged: (String value) {
-//                               // title = value;
-//                             },
-//                           ),
-//                           TextFormField(
-//                             controller: _amuntController,
-//                             decoration: InputDecoration(
-//
-//                               border: UnderlineInputBorder(),
-//                               labelText: 'amount',
-//                             ),
-//                             maxLines: 1,
-//                             onChanged: (String value) {
-//                               // des = value;
-//                             },
-//                           ),
-//                         ]),
-//                     actions: <Widget>[
-//                       TextButton(
-//                           onPressed: Navigator.of(context).pop,
-//                           child: const Text('CANCEL')),
-//                       TextButton(
-//                         onPressed: () {
-//                           setState(() {
-//                               showDialog(
-//                                   context: context,
-//                                   builder: (BuildContext context) {
-//                                     return const AlertDialog(
-//                                       icon: Icon(
-//                                         Icons.error,
-//                                         color: Colors.red,
-//                                       ),
-//                                       title: Text(
-//                                         "The Titel Cannot be empty",
-//                                         style: TextStyle(
-//                                           fontWeight: FontWeight.bold,
-//                                           fontSize: 22,
-//                                         ),
-//                                       ),
-// //
-//                                       //   TextButton(
-//                                       //       onPressed: Navigator.pop(context),
-//                                       //       child: Text('CANCEL'))
-//                                       // ],
-//                                     );
-//                                   });
-//                          {
-//                               // modakharat.add(title);
-//                               // modakharat.add(des);
-//                               // Navigator.pop(context);
-//                             }
-//                           }
-//                           );
-//                         },
-//                         child: const Text("ADD"),
-//                       ),
-//                     ],
-//                   );
-//                 });
-//
-//         },
-//         tooltip: "Centre FAB",
-//         child: Container(
-//           margin: EdgeInsets.all(15.0),
-//           child: Icon(Icons.add),
-//           color: primaryColor,
-//         ),
-//         elevation: 4.0,
-//       ),
-//
-//       bottomNavigationBar: BottomAppBar(
-//         child: Container(
-//           margin: EdgeInsets.only(left: 12.0, right: 12.0),
-//           child: Row(
-//             mainAxisSize: MainAxisSize.max,
-//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//             children: <Widget>[
-//               IconButton(
-//                 onPressed: () {},
-//                 iconSize: 27.0,
-//                 icon: Icon(
-//                   Icons.home,
-//                   //darken the icon if it is selected or else give it a different color
-//                   color: primaryColor1,
-//                 ),
-//               ),
-//               SizedBox(
-//                 width: 50.0,
-//               ),
-//             ],
-//           ),
-//         ),
-//         shape: CircularNotchedRectangle(),
-//         color: primaryColor1,
-//       ),
-//       body: Column(children: [
-//           Card(
-//               margin: const EdgeInsets.only(
-//                   top: 10, left: 20, right: 20, bottom: 50),
-//               elevation: 4,
-//               shape: RoundedRectangleBorder(
-//                   borderRadius: BorderRadius.circular(20)),
-//               child: Column(children: [
-//                 Row(children: [
-//                   CustomButtonSocial(
-//                     text: 'مصروفاتي',
-//                     imageName: 'assets/images/cash.png',
-//                     onPress: () {},
-//                   ),
-//                   SizedBox(
-//                     width: 20,
-//                   ),
-//                   Container(
-//                       child: CustomText(
-//                     text: ('${this.widget.mod = int.parse(widget.sal) * 20 / 100}'),
-//                   ))
-//                 ]),
-//                 Row(children: [
-//                   SizedBox(
-//                     width: 20,
-//                   ),
-//                   Container(
-//                       child: CustomText(
-//                     text: ("المتبقي من المصروفات "),
-//                   )),
-//                   SizedBox(
-//                     width: 100,
-//                   ),
-//                   Container(
-//                       child: CustomText(
-//                     text: ("١٥،٠٠٠ ريال "),
-//                   ))
-//                 ]),
-//                    ListView(
-//                        children: [
-//                                Card(
-//                     margin: const EdgeInsets.all(8),
-//                     elevation: 4,
-//                     shape: RoundedRectangleBorder(
-//                         borderRadius: BorderRadius.circular(20)),
-//                     child: ListTile(
-//                       // leading:
-//                       // Container(
-//                       //   child: CircularPercentIndicator(
-//                       //     radius: 30.0,
-//                       //     percent: 60 / 100,
-//                       //     animation: true,
-//                       //     animationDuration: 1000,
-//                       //     center: new Text(
-//                       //       "%80",
-//                       //       style: TextStyle(
-//                       //         fontSize: 5,
-//                       //       ),
-//                       //     ),
-//                       //     progressColor: primaryColor,
-//                       //     circularStrokeCap: CircularStrokeCap.round,
-//                       //   ),
-//                       // ),
-//                       title: Text("Modakharat[int].amunt"),
-//                       // TextField
-//                       subtitle:Text("Modakharat[int].reson"),
-//                       trailing: IconButton(
-//                         icon: const Icon(
-//                           Icons.delete,
-//                           color: primaryColor,
-//                         ),
-//                         onPressed: () {
-//                           setState(() {
-//                             // modakharat.removeAt(index);
-//                           });
-//                         },
-//                       ),
-//                     ),
-//
-//                   ),
-//       // RadioListTile(title:Text ("amount"),value: Modakharat.amount, groupValue: _selectedModakharat, onChanged:
-//       // (newValue) => setState(() => _selectedModakharat = newValue! )
-//       // ),
-//       // RadioListTile(title:Text ("reason"),value: Modakharat.reason, groupValue: _selectedModakharat, onChanged:
-//       //     (newValue) => setState(() => _selectedModakharat = newValue! )
-//       // ),
-//                ]
-//     ),
-//
-//
-//         ]
-//               )
-//     ),
-//     ]),
-//     );
-//   }
-// }
 
 import 'dart:html';
 
@@ -275,6 +14,8 @@ import 'home_screen.dart';
 
 class ModkharatScreen extends StatefulWidget {
   String sal;
+  var m;
+  var mm =100;
 
   ModkharatScreen({Key? key, required this.sal}) : super(key: key);
   @override
@@ -340,10 +81,12 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
 
 
     return Scaffold(
+
         appBar: AppBar(
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
           backgroundColor: primaryColor,
+          elevation: 0.0,
           leading: GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -470,10 +213,19 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
           color: primaryColor1,
         ),
         body:
+        Stack(
+          children: <Widget>[
+            Container(
+              width: 1000,
+              height: 80,
+          color: primaryColor,
+
+            ),
         Column(children: [
           Card(
               margin: const EdgeInsets.only(
-                  top: 10, left: 60, right: 60, bottom: 50),
+                  top: 50, left: 60, right: 60, bottom: 50),
+
               elevation: 4,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)),
@@ -481,15 +233,17 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                 Row(children: [
                   CustomButtonSocial(
                     text: 'مدخراتي',
-                    imageName: 'assets/images/cash.png',
+                    imageName: 'assets/images/Icon.png',
                     onPress: () {},
                   ),
                   SizedBox(
-                    width: 100,
+                    width: 150,
                   ),
                   Container(
                       child: CustomText(
-                    text: ("١٥،٠٠٠ ريال "),
+                    text: (
+                        ' ${this.widget.m = int.parse(widget.sal) * 20 / 100}'
+                    ),
                   ))
                 ]),
                 Row(children: [
@@ -501,11 +255,11 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                     text: ("المتبقي من المدخرات "),
                   )),
                   SizedBox(
-                    width: 100,
+                    width: 150,
                   ),
                   Container(
                       child: CustomText(
-                    text: ("١٥،٠٠٠ ريال "),
+                    text: (  ' ${this.widget.m = int.parse(widget.sal) * 20 / 100 }'),
                   ))
                 ]),
               ])),
@@ -553,7 +307,7 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
 
                 );
               })
-        ]));
+        ])]));
   }
 }
 
