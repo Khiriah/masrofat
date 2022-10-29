@@ -87,6 +87,8 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'custom/constance.dart';
+import 'custom/custom_buttom_social.dart';
+import 'custom/custom_text.dart';
 import 'model/MI.dart';
 
 class EltezamtScreen extends StatefulWidget {
@@ -147,7 +149,7 @@ class _EltezamtScreenState extends State<EltezamtScreen> {
     return Scaffold(
         appBar: AppBar(
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
           backgroundColor: primaryColor,
           elevation: 0.0,
           leading: GestureDetector(
@@ -268,7 +270,7 @@ class _EltezamtScreenState extends State<EltezamtScreen> {
                   icon: Icon(
                     Icons.home,
                     //darken the icon if it is selected or else give it a different color
-                    color: primaryColor,
+                    color: primaryColor1,
                   ),
                 ),
                 SizedBox(
@@ -278,12 +280,58 @@ class _EltezamtScreenState extends State<EltezamtScreen> {
             ),
           ),
           shape: CircularNotchedRectangle(),
-          color: primaryColor,
+          color: primaryColor1,
         ),
-        body: Column(children: [
+        body:Stack(children: <Widget>[
+          // Container(
+          //     child: Text(
+          //         'الحد المسموح للإلتزامات ${this.widget.r = int.parse(widget.sal) / 2}')),
           Container(
-              child: Text(
-                  'الحد المسموح للإلتزامات ${this.widget.r = int.parse(widget.sal) / 2}')),
+            width: 1000,
+            height: 80,
+            color: primaryColor,
+          ),
+          Column(children: [
+            Card(
+                margin: const EdgeInsets.only(
+                    top: 50, left: 60, right: 60, bottom: 50),
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                child: Column(children: [
+                  Row(children: [
+                    CustomButtonSocial(
+                      text: 'التزاماتي',
+                      imageName: 'assets/images/Icon.png',
+                      onPress: () {},
+                    ),
+                    SizedBox(
+                      width: 150,
+                    ),
+                    Container(
+                        child: CustomText(
+                          text:
+                          (' ${this.widget.r = int.parse(widget.sal) / 2}'),
+                        ))
+                  ]),
+                  Row(children: [
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Container(
+                        child: CustomText(
+                          text: ("المتبقي من الالتزامات "),
+                        )),
+                    SizedBox(
+                      width: 150,
+                    ),
+                    Container(
+                        child: CustomText(
+                          text:
+                          (' ${this.widget.r = int.parse(widget.sal) / 2}'),
+                        ))
+                  ]),
+                ])),
           ListView.builder(
               // return ListView.builder(
               shrinkWrap: true,
@@ -311,8 +359,10 @@ class _EltezamtScreenState extends State<EltezamtScreen> {
                   ),
                 );
               })
+        ])
         ]));
   }
+
   @override
   void initState() {
     super.initState();

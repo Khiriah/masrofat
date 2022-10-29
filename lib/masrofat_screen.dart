@@ -7,6 +7,8 @@ import 'package:masrofat/salary_screen.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'custom/custom_buttom_social.dart';
+import 'custom/custom_text.dart';
 import 'model/MI.dart';
 
 class MasrofatScreen extends StatefulWidget {
@@ -70,8 +72,9 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
     return Scaffold(
         appBar: AppBar(
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(45)),
+              borderRadius: BorderRadius.circular(0)),
           backgroundColor: primaryColor,
+          elevation: 0.0,
           leading: GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -205,11 +208,53 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
             ),
           ),
         ),
-        body: Column(children:[
-        Container(
-        child: Text(
-        'الحد المسموح للمصروفات ${this.widget.m = int.parse(widget.sal) * 30 /
-            100}')),
+         body: Stack(children: <Widget>[
+    Container(
+      width: 1000,
+      height: 80,
+      color: primaryColor,
+    ),
+    Column(children: [
+    Card(
+    margin: const EdgeInsets.only(
+    top: 50, left: 60, right: 60, bottom: 50),
+    elevation: 4,
+    shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(20)),
+    child: Column(children: [
+    Row(children: [
+    CustomButtonSocial(
+    text: 'مصروفاتي',
+    imageName: 'assets/images/Icon.png',
+    onPress: () {},
+    ),
+    SizedBox(
+    width: 150,
+    ),
+    Container(
+    child: CustomText(
+    text:
+    (' ${this.widget.m = int.parse(widget.sal) * 30 / 100}'),
+    ))
+    ]),
+    Row(children: [
+    SizedBox(
+    width: 20,
+    ),
+    Container(
+    child: CustomText(
+    text: ("المتبقي من المصروفات "),
+    )),
+    SizedBox(
+    width: 150,
+    ),
+    Container(
+    child: CustomText(
+    text:
+    (' ${this.widget.m = int.parse(widget.sal) * 30 / 100}'),
+    ))
+    ]),
+    ])),
           ListView.builder(
             // return ListView.builder(
               shrinkWrap: true,
@@ -240,11 +285,10 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
                 );
 
               })
-        ])
-
-
-    );
+    ])
+         ]));
   }
+
   @override
   void initState() {
     super.initState();
