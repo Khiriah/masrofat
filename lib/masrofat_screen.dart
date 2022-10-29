@@ -215,7 +215,13 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
     Container(
       width: 1000,
       height: 80,
-      color: primaryColor,
+      decoration: BoxDecoration(
+          color: primaryColor,
+          borderRadius: BorderRadius.only(
+              bottomLeft:Radius.circular(50) ,bottomRight: Radius.circular(50)
+          )
+      )
+      ,
     ),
     Column(children: [
     Card(
@@ -228,7 +234,7 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
     Row(children: [
     CustomButtonSocial(
     text: 'مصروفاتي',
-    imageName: 'assets/images/Icon.png',
+      imageName: 'assets/images/Icon4.png',
     onPress: () {},
     ),
     SizedBox(

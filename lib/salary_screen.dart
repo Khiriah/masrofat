@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:masrofat/custom/custom_text.dart';
 import 'package:masrofat/eltezamat_screen.dart';
+import 'custom/custim_icon.dart';
+import 'custom/custom_buttom_social.dart';
 import 'modakharat.dart';
 import 'masrofat_screen.dart';
 import 'custom/constance.dart';
@@ -48,71 +51,127 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
         body: Stack(children: <Widget>[
           Container(
             width: 1000,
-            height: 90,
-            color: primaryColor,
+            height: 230,
+
+              decoration: BoxDecoration(
+                  color: primaryColor,
+           borderRadius: BorderRadius.only(
+                bottomLeft:Radius.circular(50) ,bottomRight: Radius.circular(50)
+           )
+              )
+            ,
           ),
           Column(
             children: [
-              Container(
-                alignment: Alignment.center,
-                margin: EdgeInsets.all(20),
-                height: 150,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.1),
-                          spreadRadius: 7,
-                          offset: Offset(10, 11))
-                    ]),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'راتبك الشهري  : ${widget.sal}',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.grey),
+            Card(
+
+                margin: const EdgeInsets.only(
+                    top: 50, left: 60, right: 60, bottom: 50),
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                child: Column(children: [
+                  Row(children: [
+                    CustomButtonSocial(
+                      text: 'راتبك الشهري ',
+                      imageName: 'assets/images/Icon4.png',
+                      onPress: () {},
                     ),
-                    Divider(
-                      height: 20,
-                      thickness: 0.5,
-                      color: Colors.grey,
+                    SizedBox(
+                      width: 150,
                     ),
-                    // Text(
-                    //   'المتبقي من الراتب : ${widget.sal} ',
-                    //   style: TextStyle(
-                    //       fontWeight: FontWeight.bold, color: Colors.grey),
-                    // ),
-                  ],
-                ),
-              ),
-              //
+                    Container(
+                        child: CustomText(
+                          text:
+                          ('${widget.sal} '),
+                        ))
+                  ]),
+                  Row(children: [
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Container(
+                        child: CustomText(
+                          text: ("المتبقي من الراتب "),
+                        )),
+                    SizedBox(
+                      width: 190,
+                    ),
+                    Container(
+                        child: CustomText(
+                          text:
+                          ('${widget.sal} '),
+                        ))
+                  ]),
+                ])),
+
+        // body: Stack(children: <Widget>[
+        //   Container(
+        //     width: 1000,
+        //     height: 90,
+        //     color: primaryColor,
+        //   ),
+        //   Column(
+        //     children: [
+        //       Container(
+        //         alignment: Alignment.center,
+        //         margin: EdgeInsets.all(20),
+        //         height: 150,
+        //         width: double.infinity,
+        //         decoration: BoxDecoration(
+        //             color: Colors.white,
+        //             borderRadius: BorderRadius.circular(15),
+        //             boxShadow: [
+        //               BoxShadow(
+        //                   color: Colors.grey.withOpacity(0.1),
+        //                   spreadRadius: 7,
+        //                   offset: Offset(10, 11))
+        //             ]),
+        //         child: Column(
+        //           mainAxisAlignment: MainAxisAlignment.center,
+        //           children: [
+        //             Text(
+        //               'راتبك الشهري  : ${widget.sal}',
+        //               style: TextStyle(
+        //                   fontWeight: FontWeight.bold, color: Colors.grey),
+        //             ),
+        //             Divider(
+        //               height: 20,
+        //               thickness: 0.5,
+        //               color: Colors.grey,
+        //             ),
+        //             // Text(
+        //             //   'المتبقي من الراتب : ${widget.sal} ',
+        //             //   style: TextStyle(
+        //             //       fontWeight: FontWeight.bold, color: Colors.grey),
+        //             // ),
+        //           ],
+        //         ),
+        //       ),
+        //       //
 
               Container(
                 child:
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Container(
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.all(15),
-                    height: 90,
-                    decoration: BoxDecoration(
+                      SizedBox(
+                        width: 30,
+                      ),
+                      Container(
+                      height: 100,
+                      width: 90,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(9),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.1),
-                            spreadRadius: 3,
-                          )
-                        ]),
+                      ),
                     child: Column(children: [
-                      Icon(
-                        Icons.control_point_sharp,
-                        color: Colors.grey,
-                        size: 24.0,
-                        semanticLabel:
-                            'Text to announce in accessibility modes',
+                      SizedBox(
+                        height: 10,
+                      ),
+                     Container(
+                       child: Image.asset('assets/images/icon2.png'),
+                     ),
+                      SizedBox(
+                        height: 10,
                       ),
                       TextButton(
                           onPressed: () {
@@ -123,29 +182,26 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
                                       )),
                             );
                           },
-                          child: Text('مدخرات')),
+                          child: CustomText(text: '  مدخرات')),
                     ]),
                   ),
-                  Container(
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.all(15),
-                    height: 90,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(9),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.1),
-                            spreadRadius: 3,
-                          )
-                        ]),
+                      SizedBox(
+                        width: 30,
+                      ),
+                      Container(
+                        height: 100,
+                        width: 90,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: Colors.white,
+                        ),
                     child: Column(children: [
-                      Icon(
-                        Icons.money_off,
-                        color: Colors.grey,
-                        size: 24.0,
-                        semanticLabel:
-                            'Text to announce in accessibility modes',
+                      SizedBox(
+                        height: 20,
+                      ),
+                     Image.asset('assets/images/Icon.png'),
+                      SizedBox(
+                        height: 10,
                       ),
                       TextButton(
                           onPressed: () {
@@ -156,33 +212,31 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
                                       )),
                             );
                           },
-                          child: Text('مصروفات')),
+                          child: CustomText(text: '  مصروفات')),
                     ]),
                   ),
+                      SizedBox(
+                        width: 30,
+                      ),
                   Container(
-                    alignment: Alignment.center,
-                    // margin: const EdgeInsets.only(
-                    //     top: 50, left: 25, right: 25, bottom: 50),
-                    height: 90,
+                    height: 100,
+                    width: 90,
                     decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(9),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.1),
-                            spreadRadius: 3,
-                          )
-                        ]),
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.white,
+                    ),
                     child: Column(
                       children: [
-                        Icon(
-                          Icons.work,
-                          color: Colors.grey,
-                          size: 24.0,
-                          semanticLabel:
-                              'Text to announce in accessibility modes',
+                        SizedBox(
+                          height: 10,
                         ),
+                        Image.asset('assets/images/Icon4.png'),
+                        SizedBox(
+                          height: 10,
+                        ),
+
                         TextButton(
+
                             onPressed: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
@@ -191,13 +245,15 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
                                         )),
                               );
                             },
-                            child: Text('إلتزامات')),
-                      ],
+                            child: CustomText(text: '  إلتزامات')),
+                        ],
                     ),
                   )
                 ]),
               ),
-
+SizedBox(
+  height: 80,
+),
               Container(
                   padding: EdgeInsets.all(10),
                   child: Align(
@@ -208,41 +264,41 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
                             color: Color.fromARGB(255, 23, 20, 37),
                             fontWeight: FontWeight.bold)),
                   )),
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                        padding: EdgeInsets.all(3),
-                        margin: EdgeInsets.all(1),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: primaryColor,
-                        ),
-                        child: Text(
-                          'شهري',
-                          style: TextStyle(
-                              fontSize: 15.0,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                        )),
-                    SizedBox(width: 10),
-                    Text('إسبوعي',
-                        style: TextStyle(
-                            fontSize: 15.0,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold)),
-                    Text('يومي',
-                        style: TextStyle(
-                            fontSize: 15.0,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold)),
-                    Divider(
-                      height: 30,
-                    ),
-                  ],
-                ),
-              ),
+              // Container(
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //     children: [
+              //       // Container(
+              //       //     padding: EdgeInsets.all(3),
+              //       //     margin: EdgeInsets.all(1),
+              //       //     decoration: BoxDecoration(
+              //       //       borderRadius: BorderRadius.circular(5),
+              //       //       color: primaryColor,
+              //       //     ),
+              //       //     child: Text(
+              //       //       'شهري',
+              //       //       style: TextStyle(
+              //       //           fontSize: 15.0,
+              //       //           color: Colors.white,
+              //       //           fontWeight: FontWeight.bold),
+              //       //     )),
+              //       SizedBox(width: 10),
+              //       Text('إسبوعي',
+              //           style: TextStyle(
+              //               fontSize: 15.0,
+              //               color: Colors.black,
+              //               fontWeight: FontWeight.bold)),
+              //       Text('يومي',
+              //           style: TextStyle(
+              //               fontSize: 15.0,
+              //               color: Colors.black,
+              //               fontWeight: FontWeight.bold)),
+              //       Divider(
+              //         height: 30,
+              //       ),
+              //     ],
+              //   ),
+              // ),
               Divider(
                 height: 20,
                 thickness: 0.5,

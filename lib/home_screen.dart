@@ -41,17 +41,25 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
       ),
-      body: Container(
+      body:
+      Container(
 
         child: Column(children: [
           Container(
             width: 1000,
-            height: 80,
-            color: primaryColor,
+            height: 150,
+
+            decoration: BoxDecoration(
+                color: primaryColor,
+                borderRadius: BorderRadius.only(
+                    bottomLeft:Radius.circular(50) ,bottomRight: Radius.circular(50)
+                )
+            )
+            ,
           ),
           Container(
 
-              padding: EdgeInsets.only(top: 200, left: 50, right: 50),
+              padding: EdgeInsets.only(top: 50, left: 50, right: 50),
               alignment: Alignment.center,
               child: TextField(
                 controller: _salary,

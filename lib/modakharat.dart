@@ -5,11 +5,11 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+
 import 'package:masrofat/custom/custom_text.dart';
 import 'package:masrofat/salary_screen.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'custom/constance.dart';
 import 'custom/custom_buttom_social.dart';
@@ -20,7 +20,8 @@ import 'model/MI.dart';
 class ModkharatScreen extends StatefulWidget {
   String sal;
   var m;
-  var mm = 100;
+  var mm ;
+
 
   ModkharatScreen({Key? key, required this.sal}) : super(key: key);
   @override
@@ -33,6 +34,8 @@ List<MI> MIFromJson(String str) =>
 class _ModkharatScreenState extends State<ModkharatScreen> {
 
   List<MI> modakharat= <MI>[]  ;
+
+  get i => null;
 
   loadMI() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -231,7 +234,7 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                   Row(children: [
                     CustomButtonSocial(
                       text: 'مدخراتي',
-                      imageName: 'assets/images/Icon.png',
+                      imageName: 'assets/images/Icon3.png',
                       onPress: () {},
                     ),
                     SizedBox(
@@ -257,7 +260,7 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                     Container(
                         child: CustomText(
                       text:
-                          (' ${this.widget.m = int.parse(widget.sal) * 20 / 100}'),
+                          (' ${this.widget.m = int.parse(widget.sal) * 20 / 100 }'),
                     ))
                   ]),
                 ])),

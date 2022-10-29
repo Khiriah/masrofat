@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:masrofat/custom/constance.dart';
 
 
 class CustomText extends StatelessWidget {
@@ -11,7 +12,7 @@ final String text ;
 
 CustomText({
   this.text="",
-  this.color=Colors.black,
+  this.color=primaryColor1,
   this.fontSize=16,
   this.alignment=Alignment.topLeft
 });
