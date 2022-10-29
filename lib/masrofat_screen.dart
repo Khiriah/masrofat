@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:masrofat/custom/constance.dart';
 import 'package:masrofat/home_screen.dart';
 import 'package:masrofat/salary_screen.dart';
@@ -161,6 +163,7 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
                                   _titleController.text,
                                   int.parse(_amuntController.text),
                                 );
+                                Get.to(SalaryScreen1);
                                 Navigator.pop(context);
                               }
                             });

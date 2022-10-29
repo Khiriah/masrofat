@@ -4,6 +4,8 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:masrofat/custom/custom_text.dart';
 import 'package:masrofat/salary_screen.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -169,6 +171,7 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                                 _titleController.text,
                                 int.parse(_amuntController.text),
                               );
+                              Get.to(SalaryScreen1);
                               Navigator.pop(context);
                             }
                           });
