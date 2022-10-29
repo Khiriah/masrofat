@@ -1,8 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:masrofat/custom/constance.dart';
 import 'package:masrofat/home_screen.dart';
 import 'package:masrofat/salary_screen.dart';
-import 'package:localstorage/localstorage.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'model/MI.dart';
 
 class MasrofatScreen extends StatefulWidget {
   String sal;
@@ -14,75 +19,235 @@ class MasrofatScreen extends StatefulWidget {
   @override
   State<MasrofatScreen> createState() => _MasrofatScreenState();
 }
+List<MI> MIFromJson(String str) =>
+    List<MI>.from(
+        json.decode(str).map((x) => MI.fromJson(x)));
 
 class _MasrofatScreenState extends State<MasrofatScreen> {
-  final LocalStorage storage = new LocalStorage('some_key');
+  List<MI> masrofat= <MI>[]  ;
+
+  loadMI() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      try {
+      masrofat=MIFromJson(prefs.getString("Masrofat")!);
+        
+      } catch (e) {
+        
+      }
+    });
+
+
+  }
+
+  final _amuntController = TextEditingController();
+  final _titleController = TextEditingController();
+
+  void _add(BuildContext context, String masrofat1, int amount) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    masrofat.add(MI(title: masrofat1, amount: amount));
+    prefs.setString('Masrofat', jsonEncode(masrofat));
+
+    showSnackBar(context, 'Your Masrofat was added');
+    _titleController.clear();
+    _amuntController.clear();
+  }
+  void _delete(BuildContext context, int pos) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    masrofat.removeAt(pos);
+    prefs.setString('Masrofat', jsonEncode(masrofat));
+    showSnackBar(context, 'Your Masrofat was removed');
+  _titleController.clear();
+    _amuntController.clear();
+  }
+  void showSnackBar(BuildContext context, String message) async {
+    final snackBar = SnackBar(content: Text(message));
+    ScaffoldMessenger.of(context).showSnackBar((snackBar));
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45)),
-        backgroundColor: primaryColor,
-        leading: GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      SalaryScreen1(sal: widget.sal, masraf: widget.m),
-                ),
-              );
-            },
-            child: Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-            )),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation
-          .centerDocked, //specify the location of the FAB
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: primaryColor,
-        onPressed: () {
-          setState(() {});
-        },
-        tooltip: "Centre FAB",
-        child: Container(
-          margin: EdgeInsets.all(15.0),
-          child: Icon(Icons.add),
-          color: primaryColor,
+        appBar: AppBar(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(45)),
+          backgroundColor: primaryColor,
+          leading: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        SalaryScreen1(sal: widget.sal, masraf: widget.m),
+                  ),
+                );
+              },
+              child: Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              )),
         ),
-        elevation: 4.0,
-      ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        //specify the location of the FAB
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: primaryColor,
+          onPressed: () {
+            setState(() {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextFormField(
+                              controller: _titleController,
+                              decoration: const InputDecoration(
+                                  hintText: " ",
+                                  border: UnderlineInputBorder(),
+                                  labelText: 'المصروف'),
+                              onChanged: (String value) {},
+                            ),
+                            TextFormField(
+                              controller: _amuntController,
+                              keyboardType: TextInputType.number,
+                              decoration: const InputDecoration(
+                                  hintText: " ",
+                                  border: UnderlineInputBorder(),
+                                  labelText: 'قيمة المصروف'),
+                              onChanged: (String value) {},
+                            ),
+                          ]),
+                      actions: <Widget>[
+                        TextButton(
+                            onPressed: Navigator
+                                .of(context)
+                                .pop,
+                            child: const Text('CANCEL')),
+                        TextButton(
+                          onPressed: () {
+                            setState(() {
+                              if (_titleController.text.isEmpty ||
+                                  _amuntController.text.isEmpty) {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return const AlertDialog(
+                                        icon: Icon(
+                                          Icons.error,
+                                          color: Colors.red,
+                                        ),
+                                        title: Text(
+                                          "The Titel Cannot be empty",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 22,
+                                          ),
+                                        ),
+                                      );
+                                    });
+                              } else {
+                                // print(
+                                //   reason,
+                                // );
+                                _add(
+                                  context,
+                                  _titleController.text,
+                                  int.parse(_amuntController.text),
+                                );
+                                Navigator.pop(context);
+                              }
+                            });
+                          },
+                          child: const Text("ADD"),
+                        ),
+                      ],
+                    );
+                  });
+            });
+          },
+          tooltip: "Centre FAB",
+          child: Container(
+            margin: EdgeInsets.all(15.0),
+            child: Icon(Icons.add),
+            color: primaryColor,
+          ),
+          elevation: 4.0,
+        ),
 
-      bottomNavigationBar: BottomAppBar(
-        child: Container(
-          margin: EdgeInsets.only(left: 12.0, right: 12.0),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              IconButton(
-                onPressed: () {},
-                iconSize: 27.0,
-                icon: Icon(
-                  Icons.home,
-                  //darken the icon if it is selected or else give it a different color
-                  color: primaryColor1,
+        bottomNavigationBar: BottomAppBar(
+          shape: CircularNotchedRectangle(),
+          color: primaryColor1,
+          child: Container(
+            margin: EdgeInsets.only(left: 12.0, right: 12.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                IconButton(
+                  onPressed: () {
+
+                  },
+                  iconSize: 27.0,
+                  icon: const Icon(
+                    Icons.home,
+                    //darken the icon if it is selected or else give it a different color
+                    color: primaryColor1,
+                  ),
                 ),
-              ),
-              SizedBox(
-                width: 50.0,
-              ),
-            ],
+                const SizedBox(
+                  width: 50.0,
+                ),
+              ],
+            ),
           ),
         ),
-        shape: CircularNotchedRectangle(),
-        color: primaryColor1,
-      ),
-      body: Container(
-          child: Text(
-              'الحد المسموح للمصروفات ${this.widget.m = int.parse(widget.sal) * 30 / 100}')),
+        body: Column(children:[
+        Container(
+        child: Text(
+        'الحد المسموح للمصروفات ${this.widget.m = int.parse(widget.sal) * 30 /
+            100}')),
+          ListView.builder(
+            // return ListView.builder(
+              shrinkWrap: true,
+
+              itemCount: masrofat.length,
+              itemBuilder: (BuildContext context, int position) {
+                return  Card(
+                  margin: const EdgeInsets.all(8),
+                  elevation: 2.4,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  child: ListTile(
+                    title: Text( masrofat[position].title),
+                    subtitle: Text(masrofat[position].amount.toString()),
+                    trailing: IconButton(
+                      icon: const Icon(
+                        Icons.delete,
+                        color: primaryColor,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _delete(context, position);
+                        });
+                      },
+                    ),
+                  ),
+
+                );
+
+              })
+        ])
+
+
     );
+  }
+  @override
+  void initState() {
+    super.initState();
+    loadMI();
   }
 }
