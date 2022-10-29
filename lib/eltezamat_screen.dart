@@ -238,7 +238,7 @@ class _EltezamtScreenState extends State<EltezamtScreen> {
                                   _titleController.text,
                                   int.parse(_amuntController.text),
                                 );
-                                Get.to(SalaryScreen1);
+                               
                                 Navigator.pop(context);
                               }
                             });

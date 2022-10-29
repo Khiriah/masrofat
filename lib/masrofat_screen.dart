@@ -163,7 +163,7 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
                                   _titleController.text,
                                   int.parse(_amuntController.text),
                                 );
-                                Get.to(SalaryScreen1);
+
                                 Navigator.pop(context);
                               }
                             });

@@ -165,13 +165,12 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                                     );
                                   });
                             } else {
-
                               _add(
                                 context,
                                 _titleController.text,
                                 int.parse(_amuntController.text),
                               );
-                              Get.to(SalaryScreen1);
+
                               Navigator.pop(context);
                             }
                           });
