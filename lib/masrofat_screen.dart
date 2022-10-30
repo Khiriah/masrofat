@@ -23,25 +23,20 @@ class MasrofatScreen extends StatefulWidget {
   @override
   State<MasrofatScreen> createState() => _MasrofatScreenState();
 }
+
 List<MI> MIFromJson(String str) =>
-    List<MI>.from(
-        json.decode(str).map((x) => MI.fromJson(x)));
+    List<MI>.from(json.decode(str).map((x) => MI.fromJson(x)));
 
 class _MasrofatScreenState extends State<MasrofatScreen> {
-  List<MI> masrofat= <MI>[]  ;
+  List<MI> masrofat = <MI>[];
 
   loadMI() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       try {
-      masrofat=MIFromJson(prefs.getString("Masrofat")!);
-        
-      } catch (e) {
-        
-      }
+        masrofat = MIFromJson(prefs.getString("Masrofat")!);
+      } catch (e) {}
     });
-
-
   }
 
   final _amuntController = TextEditingController();
@@ -56,14 +51,16 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
     _titleController.clear();
     _amuntController.clear();
   }
+
   void _delete(BuildContext context, int pos) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     masrofat.removeAt(pos);
     prefs.setString('Masrofat', jsonEncode(masrofat));
     showSnackBar(context, 'تم المسح  ');
-  _titleController.clear();
+    _titleController.clear();
     _amuntController.clear();
   }
+
   void showSnackBar(BuildContext context, String message) async {
     final snackBar = SnackBar(content: Text(message));
     ScaffoldMessenger.of(context).showSnackBar((snackBar));
@@ -73,8 +70,7 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(0)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
           backgroundColor: primaryColor,
           elevation: 0.0,
           leading: GestureDetector(
@@ -131,9 +127,7 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
                           ]),
                       actions: <Widget>[
                         TextButton(
-                            onPressed: Navigator
-                                .of(context)
-                                .pop,
+                            onPressed: Navigator.of(context).pop,
                             child: const Text('إلغاء')),
                         TextButton(
                           onPressed: () {
@@ -186,7 +180,6 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
           ),
           elevation: 4.0,
         ),
-
         bottomNavigationBar: BottomAppBar(
           shape: CircularNotchedRectangle(),
           color: primaryColor1,
@@ -197,9 +190,7 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 IconButton(
-                  onPressed: () {
-
-                  },
+                  onPressed: () {},
                   iconSize: 27.0,
                   icon: const Icon(
                     Icons.home,
@@ -214,91 +205,86 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
             ),
           ),
         ),
-         body: Stack(children: <Widget>[
-    Container(
-      width: 1000,
-      height: 80,
-      decoration: BoxDecoration(
-          color: primaryColor,
-          borderRadius: BorderRadius.only(
-              bottomLeft:Radius.circular(50) ,bottomRight: Radius.circular(50)
-          )
-      )
-      ,
-    ),
-    Column(children: [
-    Card(
-    margin: const EdgeInsets.only(
-    top: 50, left: 60, right: 60, bottom: 50),
-    elevation: 4,
-    shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(20)),
-    child: Column(children: [
-    Row(children: [
-    CustomButtonSocial(
-    text: 'مصروفاتي',
-      imageName: 'assets/images/Icon4.png',
-    onPress: () {},
-    ),
-    SizedBox(
-    width: 150,
-    ),
-    Container(
-    child: CustomText(
-    text:
-    (' ${this.widget.m = int.parse(widget.sal) * 30 / 100}'),
-    ))
-    ]),
-    Row(children: [
-    SizedBox(
-    width: 20,
-    ),
-    Container(
-    child: CustomText(
-    text: ("المتبقي من المصروفات "),
-    )),
-    SizedBox(
-    width: 150,
-    ),
-    Container(
-    child: CustomText(
-    text:
-    (' ${this.widget.m = int.parse(widget.sal) * 30 / 100}'),
-    ))
-    ]),
-    ])),
-          ListView.builder(
-            // return ListView.builder(
-              shrinkWrap: true,
-
-              itemCount: masrofat.length,
-              itemBuilder: (BuildContext context, int position) {
-                return  Card(
-                  margin: const EdgeInsets.all(8),
-                  elevation: 2.4,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  child: ListTile(
-                    title: Text( masrofat[position].title),
-                    subtitle: Text(masrofat[position].amount.toString()),
-                    trailing: IconButton(
-                      icon: const Icon(
-                        Icons.delete,
-                        color: primaryColor,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _delete(context, position);
-                        });
-                      },
+        body: Stack(children: <Widget>[
+          Container(
+            width: 1000,
+            height: 80,
+            decoration: BoxDecoration(
+                color: primaryColor,
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(50),
+                    bottomRight: Radius.circular(50))),
+          ),
+          Column(children: [
+            Card(
+                margin: const EdgeInsets.only(
+                    top: 50, left: 60, right: 60, bottom: 50),
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                child: Column(children: [
+                  Row(children: [
+                    CustomButtonSocial(
+                      text: 'مصروفاتي',
+                      imageName: 'assets/images/Icon4.png',
+                      onPress: () {},
                     ),
-                  ),
-
-                );
-
-              })
-    ])
-         ]));
+                    SizedBox(
+                      width: 50,
+                    ),
+                    Container(
+                        child: CustomText(
+                      text:
+                          (' ${this.widget.m = int.parse(widget.sal) * 30 / 100}'),
+                    ))
+                  ]),
+                  Row(children: [
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Container(
+                        child: CustomText(
+                      text: ("المتبقي من المصروفات "),
+                    )),
+                    SizedBox(
+                      width: 50,
+                    ),
+                    Container(
+                        child: CustomText(
+                      text:
+                          (' ${this.widget.m = int.parse(widget.sal) * 30 / 100}'),
+                    ))
+                  ]),
+                ])),
+            ListView.builder(
+                // return ListView.builder(
+                shrinkWrap: true,
+                itemCount: masrofat.length,
+                itemBuilder: (BuildContext context, int position) {
+                  return Card(
+                    margin: const EdgeInsets.all(8),
+                    elevation: 2.4,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    child: ListTile(
+                      title: Text(masrofat[position].title),
+                      subtitle: Text(masrofat[position].amount.toString()),
+                      trailing: IconButton(
+                        icon: const Icon(
+                          Icons.delete,
+                          color: primaryColor,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _delete(context, position);
+                          });
+                        },
+                      ),
+                    ),
+                  );
+                })
+          ])
+        ]));
   }
 
   @override

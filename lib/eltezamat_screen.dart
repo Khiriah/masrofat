@@ -113,11 +113,8 @@ class _EltezamtScreenState extends State<EltezamtScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       try {
-      Il = MIFromJson(prefs.getString("Iltizamat")!);
-        
-      } catch (e) {
-        
-      }
+        Il = MIFromJson(prefs.getString("Iltizamat")!);
+      } catch (e) {}
     });
   }
 
@@ -148,8 +145,7 @@ class _EltezamtScreenState extends State<EltezamtScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
           backgroundColor: primaryColor,
           elevation: 0.0,
           leading: GestureDetector(
@@ -241,7 +237,7 @@ class _EltezamtScreenState extends State<EltezamtScreen> {
                                   _titleController.text,
                                   int.parse(_amuntController.text),
                                 );
-                               
+
                                 Navigator.pop(context);
                               }
                             });
@@ -286,7 +282,7 @@ class _EltezamtScreenState extends State<EltezamtScreen> {
           shape: CircularNotchedRectangle(),
           color: primaryColor1,
         ),
-        body:Stack(children: <Widget>[
+        body: Stack(children: <Widget>[
           // Container(
           //     child: Text(
           //         'الحد المسموح للإلتزامات ${this.widget.r = int.parse(widget.sal) / 2}')),
@@ -296,10 +292,8 @@ class _EltezamtScreenState extends State<EltezamtScreen> {
             decoration: BoxDecoration(
                 color: primaryColor,
                 borderRadius: BorderRadius.only(
-                    bottomLeft:Radius.circular(50) ,bottomRight: Radius.circular(50)
-                )
-            )
-            ,
+                    bottomLeft: Radius.circular(50),
+                    bottomRight: Radius.circular(50))),
           ),
           Column(children: [
             Card(
@@ -316,13 +310,12 @@ class _EltezamtScreenState extends State<EltezamtScreen> {
                       onPress: () {},
                     ),
                     SizedBox(
-                      width: 150,
+                      width: 50,
                     ),
                     Container(
                         child: CustomText(
-                          text:
-                          (' ${this.widget.r = int.parse(widget.sal) / 2}'),
-                        ))
+                      text: (' ${this.widget.r = int.parse(widget.sal) / 2}'),
+                    ))
                   ]),
                   Row(children: [
                     SizedBox(
@@ -330,46 +323,45 @@ class _EltezamtScreenState extends State<EltezamtScreen> {
                     ),
                     Container(
                         child: CustomText(
-                          text: ("المتبقي من الالتزامات "),
-                        )),
+                      text: ("المتبقي من الالتزامات "),
+                    )),
                     SizedBox(
-                      width: 150,
+                      width: 50,
                     ),
                     Container(
                         child: CustomText(
-                          text:
-                          (' ${this.widget.r = int.parse(widget.sal) / 2}'),
-                        ))
+                      text: (' ${this.widget.r = int.parse(widget.sal) / 2}'),
+                    ))
                   ]),
                 ])),
-          ListView.builder(
-              // return ListView.builder(
-              shrinkWrap: true,
-              itemCount: Il.length,
-              itemBuilder: (BuildContext context, int position) {
-                return Card(
-                  margin: const EdgeInsets.all(8),
-                  elevation: 2.4,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  child: ListTile(
-                    title: Text(Il[position].title),
-                    subtitle: Text(Il[position].amount.toString()),
-                    trailing: IconButton(
-                      icon: const Icon(
-                        Icons.delete,
-                        color: primaryColor,
+            ListView.builder(
+                // return ListView.builder(
+                shrinkWrap: true,
+                itemCount: Il.length,
+                itemBuilder: (BuildContext context, int position) {
+                  return Card(
+                    margin: const EdgeInsets.all(8),
+                    elevation: 2.4,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    child: ListTile(
+                      title: Text(Il[position].title),
+                      subtitle: Text(Il[position].amount.toString()),
+                      trailing: IconButton(
+                        icon: const Icon(
+                          Icons.delete,
+                          color: primaryColor,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _delete(context, position);
+                          });
+                        },
                       ),
-                      onPressed: () {
-                        setState(() {
-                          _delete(context, position);
-                        });
-                      },
                     ),
-                  ),
-                );
-              })
-        ])
+                  );
+                })
+          ])
         ]));
   }
 

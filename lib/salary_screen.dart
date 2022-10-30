@@ -15,7 +15,6 @@ import 'package:pie_chart/pie_chart.dart';
 import 'model/MI.dart';
 
 class SalaryScreen1 extends StatefulWidget {
-
   var sal = '';
   var total;
   var masraf;
@@ -23,33 +22,28 @@ class SalaryScreen1 extends StatefulWidget {
   var mm;
 
   SalaryScreen1(
-      {Key? key, required this.sal, this.total, this.masraf, this.mod,this.mm})
+      {Key? key, required this.sal, this.total, this.masraf, this.mod, this.mm})
       : super(key: key);
   @override
   State<SalaryScreen1> createState() => _SalaryScreen1State();
-
-
 }
+
 List<MI> MIFromJson(String str) =>
-    List<MI>.from(
-        json.decode(str).map((x) => MI.fromJson(x)));
+    List<MI>.from(json.decode(str).map((x) => MI.fromJson(x)));
 
 class _SalaryScreen1State extends State<SalaryScreen1> {
   late List<chartScreen> data;
   List<MI> masrofat = <MI>[];
   List<MI> modakharat = <MI>[];
-  
 
   List<MI> Il = <MI>[];
   var remain;
-
 
   Map<String, double> dataMap = {
     "إلتزامات": 0.5,
     "مصروفات": 0.3,
     "مدخرات": 0.2,
   };
-
 
   loadMI() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -58,26 +52,24 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
         masrofat = MIFromJson(prefs.getString("Masrofat")!);
         Il = MIFromJson(prefs.getString("Iltizamat")!);
         modakharat = MIFromJson(prefs.getString("Modakharat")!);
-        var sum=0;
-        for(final e in Il){
+        var sum = 0;
+        for (final e in Il) {
           //
-          sum+=e.amount;
+          sum += e.amount;
         }
-        for(final e in masrofat){
+        for (final e in masrofat) {
           //
-          sum+=e.amount;
+          sum += e.amount;
         }
-        for(final e in modakharat){
+        for (final e in modakharat) {
           //
-          sum+=e.amount;
+          sum += e.amount;
         }
-        remain= int.parse(widget.sal)-sum;
-
-      } catch (e) {
-
-      }
+        remain = int.parse(widget.sal) - sum;
+      } catch (e) {}
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,15 +95,12 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
             decoration: BoxDecoration(
                 color: primaryColor,
                 borderRadius: BorderRadius.only(
-                    bottomLeft:Radius.circular(50) ,bottomRight: Radius.circular(50)
-                )
-            )
-            ,
+                    bottomLeft: Radius.circular(50),
+                    bottomRight: Radius.circular(50))),
           ),
           Column(
             children: [
               Card(
-
                   margin: const EdgeInsets.only(
                       top: 50, left: 60, right: 60, bottom: 50),
                   elevation: 4,
@@ -125,13 +114,12 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
                         onPress: () {},
                       ),
                       SizedBox(
-                        width: 150,
+                        width: 30,
                       ),
                       Container(
                           child: CustomText(
-                            text:
-                            ('${widget.sal} '),
-                          ))
+                        text: ('${widget.sal} '),
+                      ))
                     ]),
                     Row(children: [
                       SizedBox(
@@ -139,23 +127,21 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
                       ),
                       Container(
                           child: CustomText(
-                            text: ("المتبقي من الراتب "),
-                          )),
+                        text: ("المتبقي من الراتب "),
+                      )),
                       SizedBox(
-                        width: 190,
+                        width: 80,
                       ),
                       Container(
                           child: CustomText(
-                            text:
-                            ('${remain} '),
-                          ))
+                        text: ('${remain} '),
+                      ))
                     ]),
                   ])),
 
-
               Container(
                 child:
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   SizedBox(
                     width: 30,
                   ),
@@ -181,8 +167,8 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                   builder: (context) => ModkharatScreen(
-                                    sal: widget.sal,
-                                  )),
+                                        sal: widget.sal,
+                                      )),
                             );
                           },
                           child: CustomText(text: '  مدخرات')),
@@ -211,8 +197,8 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                   builder: (context) => MasrofatScreen(
-                                    sal: widget.sal,
-                                  )),
+                                        sal: widget.sal,
+                                      )),
                             );
                           },
                           child: CustomText(text: '  مصروفات')),
@@ -237,15 +223,13 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
                         SizedBox(
                           height: 10,
                         ),
-
                         TextButton(
-
                             onPressed: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                     builder: (context) => EltezamtScreen(
-                                      sal: widget.sal,
-                                    )),
+                                          sal: widget.sal,
+                                        )),
                               );
                             },
                             child: CustomText(text: '  إلتزامات')),
@@ -308,8 +292,6 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
               //   color: Colors.grey,
               // ),
 
-
-
               // ),
               Center(
                 child: Container(
@@ -319,10 +301,7 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
                     dataMap: dataMap,
                     animationDuration: Duration(milliseconds: 800),
                     chartLegendSpacing: 15,
-                    chartRadius: MediaQuery
-                        .of(context)
-                        .size
-                        .width / 2.4,
+                    chartRadius: MediaQuery.of(context).size.width / 2.4,
                     // colorList:
                     initialAngleInDegree: 0,
                     chartType: ChartType.ring,
@@ -354,7 +333,6 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
         ]));
   }
 
-
   @override
   void initState() {
     loadMI();
@@ -362,4 +340,3 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
     super.initState();
   }
 }
-

@@ -20,8 +20,7 @@ import 'model/MI.dart';
 class ModkharatScreen extends StatefulWidget {
   String sal;
   var m;
-  var mm ;
-
+  var mm;
 
   ModkharatScreen({Key? key, required this.sal}) : super(key: key);
   @override
@@ -29,11 +28,10 @@ class ModkharatScreen extends StatefulWidget {
 }
 
 List<MI> MIFromJson(String str) =>
-    List<MI>.from(
-        json.decode(str).map((x) => MI.fromJson(x)));
-class _ModkharatScreenState extends State<ModkharatScreen> {
+    List<MI>.from(json.decode(str).map((x) => MI.fromJson(x)));
 
-  List<MI> modakharat= <MI>[]  ;
+class _ModkharatScreenState extends State<ModkharatScreen> {
+  List<MI> modakharat = <MI>[];
 
   get i => null;
 
@@ -41,29 +39,33 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       try {
-        modakharat=MIFromJson(prefs.getString("Modakharat")!);
-
-      } catch (e) {
-
-      }
+        modakharat = MIFromJson(prefs.getString("Modakharat")!);
+      } catch (e) {}
     });
-
-
   }
-
 
   final _amuntController = TextEditingController();
   final _titleController = TextEditingController();
 
+  // void _add(BuildContext context, String masrofat1, int amount) async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   modakharat.add(MI(title: masrofat1, amount: amount));
+  //   prefs.setString('Modakharat', jsonEncode(modakharat));
+
+  //   showSnackBar(context, 'تمت الاضافه');
+  //   _titleController.clear();
+  //   _amuntController.clear();
+  // }
   void _add(BuildContext context, String masrofat1, int amount) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     modakharat.add(MI(title: masrofat1, amount: amount));
-    prefs.setString('Modakharat', jsonEncode(modakharat));
+    prefs.setString('Masrofat', jsonEncode(modakharat));
 
     showSnackBar(context, 'تمت الاضافه');
     _titleController.clear();
     _amuntController.clear();
   }
+
   void _delete(BuildContext context, int pos) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     modakharat.removeAt(pos);
@@ -73,8 +75,6 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
     _amuntController.clear();
   }
 
-
-
   void showSnackBar(BuildContext context, String message) async {
     final snackBar = SnackBar(content: Text(message));
     ScaffoldMessenger.of(context).showSnackBar((snackBar));
@@ -82,8 +82,6 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
         appBar: AppBar(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
@@ -138,9 +136,7 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                               labelText: 'المبلغ',
                             ),
                             maxLines: 1,
-                            onChanged: (String value) {
-
-                            },
+                            onChanged: (String value) {},
                           ),
                         ]),
                     actions: <Widget>[
@@ -150,7 +146,6 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                       TextButton(
                         onPressed: () {
                           setState(() {
-
                             if (_titleController.text.isEmpty ||
                                 _amuntController.text.isEmpty) {
                               showDialog(
@@ -227,10 +222,8 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
             decoration: BoxDecoration(
                 color: primaryColor,
                 borderRadius: BorderRadius.only(
-                    bottomLeft:Radius.circular(50) ,bottomRight: Radius.circular(50)
-                )
-            )
-            ,
+                    bottomLeft: Radius.circular(50),
+                    bottomRight: Radius.circular(50))),
           ),
           Column(children: [
             Card(
@@ -247,7 +240,7 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                       onPress: () {},
                     ),
                     SizedBox(
-                      width: 150,
+                      width: 50,
                     ),
                     Container(
                         child: CustomText(
@@ -264,12 +257,12 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                       text: ("المتبقي من المدخرات "),
                     )),
                     SizedBox(
-                      width: 150,
+                      width: 50,
                     ),
                     Container(
                         child: CustomText(
                       text:
-                          (' ${this.widget.m = int.parse(widget.sal) * 20 / 100 }'),
+                          (' ${this.widget.m = int.parse(widget.sal) * 20 / 100}'),
                     ))
                   ]),
                 ])),
@@ -300,8 +293,8 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                           circularStrokeCap: CircularStrokeCap.round,
                         ),
                       ),
-                      title: Text( modakharat[position].title),
-                     subtitle: Text(modakharat[position].amount.toString()),
+                      title: Text(modakharat[position].title),
+                      subtitle: Text(modakharat[position].amount.toString()),
                       trailing: IconButton(
                         icon: const Icon(
                           Icons.delete,
@@ -318,6 +311,12 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                 })
           ])
         ]));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadMI();
   }
 }
 
