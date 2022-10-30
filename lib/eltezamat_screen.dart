@@ -125,7 +125,7 @@ class _EltezamtScreenState extends State<EltezamtScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     Il.add(MI(title: masrofat1, amount: amount));
     prefs.setString('Iltizamat', jsonEncode(Il));
-    showSnackBar(context, 'Your Iltizamat was added');
+    showSnackBar(context, 'تمت الاضافه');
     _titleController.clear();
     _amuntController.clear();
   }
@@ -134,7 +134,7 @@ class _EltezamtScreenState extends State<EltezamtScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     Il.removeAt(pos);
     prefs.setString('Iltizamat', jsonEncode(Il));
-    showSnackBar(context, 'Your Iltizamat was removed');
+    showSnackBar(context, 'تم مسح هدفك');
     _titleController.clear();
     _amuntController.clear();
   }
@@ -185,6 +185,9 @@ class _EltezamtScreenState extends State<EltezamtScreen> {
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            CustomText(
+                              text: "إضافة إلتزام جديد",
+                            ),
                             TextFormField(
                               controller: _titleController,
                               decoration: const InputDecoration(
@@ -206,7 +209,7 @@ class _EltezamtScreenState extends State<EltezamtScreen> {
                       actions: <Widget>[
                         TextButton(
                             onPressed: Navigator.of(context).pop,
-                            child: const Text('CANCEL')),
+                            child: const Text('إلغاء')),
                         TextButton(
                           onPressed: () {
                             setState(() {
@@ -221,7 +224,7 @@ class _EltezamtScreenState extends State<EltezamtScreen> {
                                           color: Colors.red,
                                         ),
                                         title: Text(
-                                          "The Titel Cannot be empty",
+                                          "الرجاء إكمال المطلوب ",
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 22,
@@ -243,14 +246,14 @@ class _EltezamtScreenState extends State<EltezamtScreen> {
                               }
                             });
                           },
-                          child: const Text("ADD"),
+                          child: const Text("إضافة"),
                         ),
                       ],
                     );
                   });
             });
           },
-          tooltip: "Centre FAB",
+          tooltip: "لاضافة التزام",
           child: Container(
             margin: EdgeInsets.all(15.0),
             child: Icon(Icons.add),

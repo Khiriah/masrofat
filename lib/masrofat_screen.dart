@@ -52,7 +52,7 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
     masrofat.add(MI(title: masrofat1, amount: amount));
     prefs.setString('Masrofat', jsonEncode(masrofat));
 
-    showSnackBar(context, 'Your Masrofat was added');
+    showSnackBar(context, 'تمت الاضافه');
     _titleController.clear();
     _amuntController.clear();
   }
@@ -60,7 +60,7 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     masrofat.removeAt(pos);
     prefs.setString('Masrofat', jsonEncode(masrofat));
-    showSnackBar(context, 'Your Masrofat was removed');
+    showSnackBar(context, 'تم المسح  ');
   _titleController.clear();
     _amuntController.clear();
   }
@@ -108,6 +108,9 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            CustomText(
+                              text: "إضافة مصروف جديد",
+                            ),
                             TextFormField(
                               controller: _titleController,
                               decoration: const InputDecoration(
@@ -131,7 +134,7 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
                             onPressed: Navigator
                                 .of(context)
                                 .pop,
-                            child: const Text('CANCEL')),
+                            child: const Text('إلغاء')),
                         TextButton(
                           onPressed: () {
                             setState(() {
@@ -146,7 +149,7 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
                                           color: Colors.red,
                                         ),
                                         title: Text(
-                                          "The Titel Cannot be empty",
+                                          "الرجاء إكمال المطلوب ",
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 22,
@@ -168,14 +171,14 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
                               }
                             });
                           },
-                          child: const Text("ADD"),
+                          child: const Text("إضافة"),
                         ),
                       ],
                     );
                   });
             });
           },
-          tooltip: "Centre FAB",
+          tooltip: "لاضافة مصروف",
           child: Container(
             margin: EdgeInsets.all(15.0),
             child: Icon(Icons.add),

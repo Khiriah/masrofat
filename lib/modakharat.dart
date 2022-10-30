@@ -60,7 +60,7 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
     modakharat.add(MI(title: masrofat1, amount: amount));
     prefs.setString('Modakharat', jsonEncode(modakharat));
 
-    showSnackBar(context, 'Your Modakharat was added');
+    showSnackBar(context, 'تمت الاضافه');
     _titleController.clear();
     _amuntController.clear();
   }
@@ -68,7 +68,7 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     modakharat.removeAt(pos);
     prefs.setString('Modakharat', jsonEncode(modakharat));
-    showSnackBar(context, 'Your Modakharat was removed');
+    showSnackBar(context, 'تم مسح هدفك ');
     _titleController.clear();
     _amuntController.clear();
   }
@@ -119,6 +119,9 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          CustomText(
+                            text: "إضافة هدف جديد",
+                          ),
                           TextFormField(
                             controller: _titleController,
                             decoration: InputDecoration(
@@ -143,7 +146,7 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                     actions: <Widget>[
                       TextButton(
                           onPressed: Navigator.of(context).pop,
-                          child: const Text('CANCEL')),
+                          child: const Text('إلغاء')),
                       TextButton(
                         onPressed: () {
                           setState(() {
@@ -159,7 +162,7 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                                         color: Colors.red,
                                       ),
                                       title: Text(
-                                        "The Titel Cannot be empty",
+                                        "الرجاء إكمال المطلوب  ",
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 22,
@@ -178,13 +181,13 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                             }
                           });
                         },
-                        child: const Text("ADD"),
+                        child: const Text("إضافة"),
                       ),
                     ],
                   );
                 });
           },
-          tooltip: "Centre FAB",
+          tooltip: "لاضافة هدف ",
           child: Container(
             margin: EdgeInsets.all(15.0),
             child: Icon(Icons.add),
@@ -221,7 +224,13 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
           Container(
             width: 1000,
             height: 80,
-            color: primaryColor,
+            decoration: BoxDecoration(
+                color: primaryColor,
+                borderRadius: BorderRadius.only(
+                    bottomLeft:Radius.circular(50) ,bottomRight: Radius.circular(50)
+                )
+            )
+            ,
           ),
           Column(children: [
             Card(
