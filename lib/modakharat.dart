@@ -20,7 +20,7 @@ import 'model/MI.dart';
 class ModkharatScreen extends StatefulWidget {
   String sal;
   var m;
-  var mm;
+  // var mm =this.widget.m;
 
   ModkharatScreen({Key? key, required this.sal}) : super(key: key);
   @override
@@ -32,8 +32,7 @@ List<MI> MIFromJson(String str) =>
 
 class _ModkharatScreenState extends State<ModkharatScreen> {
   List<MI> modakharat = <MI>[];
-
-  get i => null;
+  // get i => null;
 
   loadMI() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -59,7 +58,7 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
   void _add(BuildContext context, String masrofat1, int amount) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     modakharat.add(MI(title: masrofat1, amount: amount));
-    prefs.setString('Masrofat', jsonEncode(modakharat));
+    prefs.setString('Modakharat', jsonEncode(modakharat));
 
     showSnackBar(context, 'تمت الاضافه');
     _titleController.clear();
@@ -280,7 +279,7 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                       leading: Container(
                         child: CircularPercentIndicator(
                           radius: 20.0,
-                          percent: 60 / 100,
+                          percent: 20 / 100,
                           animation: true,
                           animationDuration: 1000,
                           center: new Text(
