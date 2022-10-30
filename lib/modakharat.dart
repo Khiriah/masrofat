@@ -279,7 +279,7 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                       leading: Container(
                         child: CircularPercentIndicator(
                           radius: 20.0,
-                          percent: 20 / 100,
+                          percent: modakharat[position].amount/1200,
                           animation: true,
                           animationDuration: 1000,
                           center: new Text(
