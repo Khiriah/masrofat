@@ -21,6 +21,7 @@ class ModkharatScreen extends StatefulWidget {
   String sal;
   var m;
   var mm;
+  var date;
 
   ModkharatScreen({Key? key, required this.sal}) : super(key: key);
   @override
@@ -33,7 +34,7 @@ List<MI> MIFromJson(String str) =>
 class _ModkharatScreenState extends State<ModkharatScreen> {
   List<MI> modakharat = <MI>[];
 
-  get i => null;
+
 
   loadMI() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -58,7 +59,7 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
   // }
   void _add(BuildContext context, String masrofat1, int amount) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    modakharat.add(MI(title: masrofat1, amount: amount));
+    modakharat.add(MI(title: masrofat1, amount: amount,kind: "modakharat"));
     prefs.setString('Masrofat', jsonEncode(modakharat));
 
     showSnackBar(context, 'تمت الاضافه');
@@ -93,7 +94,7 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        SalaryScreen1(sal: widget.sal, masraf: widget.m),
+                        SalaryScreen1(sal: widget.sal, masraf: widget.m,name: "",date: "",),
                   ),
                 );
               },
@@ -103,7 +104,8 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
               )),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation
-            .centerDocked, //specify the location of the FAB
+            .centerDocked,
+        //specify the location of the FAB
         floatingActionButton: FloatingActionButton(
           backgroundColor: primaryColor,
           onPressed: () {
@@ -141,7 +143,9 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                         ]),
                     actions: <Widget>[
                       TextButton(
-                          onPressed: Navigator.of(context).pop,
+                          onPressed: Navigator
+                              .of(context)
+                              .pop,
                           child: const Text('إلغاء')),
                       TextButton(
                         onPressed: () {
@@ -244,9 +248,10 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                     ),
                     Container(
                         child: CustomText(
-                      text:
-                          (' ${this.widget.m = int.parse(widget.sal) * 20 / 100}'),
-                    ))
+                          text:
+                          (' ${this.widget.m =
+                              int.parse(widget.sal) * 20 / 100}'),
+                        ))
                   ]),
                   Row(children: [
                     SizedBox(
@@ -254,20 +259,21 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                     ),
                     Container(
                         child: CustomText(
-                      text: ("المتبقي من المدخرات "),
-                    )),
+                          text: ("المتبقي من المدخرات "),
+                        )),
                     SizedBox(
                       width: 50,
                     ),
                     Container(
                         child: CustomText(
-                      text:
-                          (' ${this.widget.m = int.parse(widget.sal) * 20 / 100}'),
-                    ))
+                          text:
+                          (' ${this.widget.m =
+                              int.parse(widget.sal) * 20 / 100}'),
+                        ))
                   ]),
                 ])),
             ListView.builder(
-                // return ListView.builder(
+              // return ListView.builder(
                 shrinkWrap: true,
                 itemCount: modakharat.length,
                 itemBuilder: (BuildContext context, int position) {
@@ -311,46 +317,5 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                 })
           ])
         ]));
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    loadMI();
-  }
-}
-
-//Costom CLipper class with Path
-class WaveClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    debugPrint(size.width.toString());
-    var path = new Path();
-    path.lineTo(
-        0, size.height); //start path with this if you are making at bottom
-    var firstStart = Offset(size.width / 5, size.height);
-    //fist point of quadratic bezier curve
-    var firstEnd = Offset(size.width / 2.25, size.height - 50.0);
-    //second point of quadratic bezier curve
-    path.quadraticBezierTo(
-        firstStart.dx, firstStart.dy, firstEnd.dx, firstEnd.dy);
-
-    var secondStart =
-        Offset(size.width - (size.width / 3.24), size.height - 105);
-    //third point of quadratic bezier curve
-    var secondEnd = Offset(size.width, size.height - 10);
-    //fourth point of quadratic bezier curve
-    path.quadraticBezierTo(
-        secondStart.dx, secondStart.dy, secondEnd.dx, secondEnd.dy);
-    path.lineTo(
-        size.width, 0); //end with this path if you are making wave at bottom
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    return false; //if new instance have different instance than old instance
-    //then you must return true;
   }
 }

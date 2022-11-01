@@ -13,6 +13,7 @@ import 'chart_page.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 import 'model/MI.dart';
+import 'model/Muser.dart';
 
 class SalaryScreen1 extends StatefulWidget {
   var sal = '';
@@ -20,9 +21,11 @@ class SalaryScreen1 extends StatefulWidget {
   var masraf;
   var mod;
   var mm;
+  var name='';
+  var date='';
 
   SalaryScreen1(
-      {Key? key, required this.sal, this.total, this.masraf, this.mod, this.mm})
+      {Key? key, required this.sal, this.total, this.masraf, this.mod, this.mm,required this.name, required this.date})
       : super(key: key);
   @override
   State<SalaryScreen1> createState() => _SalaryScreen1State();
@@ -35,12 +38,17 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
   late List<chartScreen> data;
   List<MI> masrofat = <MI>[];
   List<MI> modakharat = <MI>[];
-
+  List<MI1> User = <MI1>[];
   List<MI> Il = <MI>[];
   var remain;
+  var summasrofat = 0;
+  var sumIl = 0;
+  var summodakharat = 0;
+
+  double x = 0;
 
   Map<String, double> dataMap = {
-    "إلتزامات": 0.5,
+    "إلتزامات": 0.0,
     "مصروفات": 0.3,
     "مدخرات": 0.2,
   };
@@ -52,30 +60,30 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
         masrofat = MIFromJson(prefs.getString("Masrofat")!);
         Il = MIFromJson(prefs.getString("Iltizamat")!);
         modakharat = MIFromJson(prefs.getString("Modakharat")!);
-        var sum = 0;
+
         for (final e in Il) {
           //
-          sum += e.amount;
+          sumIl += e.amount;
         }
         for (final e in masrofat) {
           //
-          sum += e.amount;
+          summasrofat += e.amount;
         }
         for (final e in modakharat) {
           //
-          sum += e.amount;
+          summodakharat += e.amount;
         }
-        remain = int.parse(widget.sal) - sum;
+        remain = int.parse(widget.sal) - summasrofat;
       } catch (e) {}
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
           backgroundColor: primaryColor,
+          title:Text('${widget.name}'),
           elevation: 0.0,
           leading: GestureDetector(
             onTap: () {
@@ -310,7 +318,9 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
                     legendOptions: LegendOptions(
                       showLegendsInRow: false,
                       legendPosition: LegendPosition.right,
+
                       showLegends: true,
+
                       // legendShape: _BoxShape.circle,
                       legendTextStyle: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -336,7 +346,6 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
   @override
   void initState() {
     loadMI();
-
     super.initState();
   }
 }

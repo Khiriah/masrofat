@@ -3,8 +3,7 @@ import 'package:masrofat/custom/constance.dart';
 import 'package:masrofat/custom/custom_text.dart';
 
 class FlootingButton extends StatelessWidget {
-  const FlootingButton({Key? key, required this.text, required this.onPressed}) : super(key: key);
-  final String text ;
+  const FlootingButton({Key? key, required this.onPressed}) : super(key: key);
   final Function onPressed ;
 
 
@@ -20,12 +19,6 @@ class FlootingButton extends StatelessWidget {
     onPressed: (){
     },
     // onPressed,
-    child:  CustomText(
-    text:text,
-
-    color: Colors.white,
-    alignment: Alignment.bottomCenter,
-    ),
     );
 
 

@@ -1,8 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:masrofat/model/Muser.dart';
 import 'package:masrofat/salary_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'custom/constance.dart';
 import 'package:get/get.dart';
 
+import 'custom/date_picker_page.dart';
+List<MI1> MIFromJson(String str) =>
+    List<MI1>.from(json.decode(str).map((x) => MI1.fromJson(x)));
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -12,7 +19,38 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController _salary = new TextEditingController();
+  List<MI1> User = <MI1>[];
 
+  get i => null;
+
+  loadMI1() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      try {
+        User = MIFromJson(prefs.getString("User")!);
+
+      } catch (e) {}
+    });
+  }
+
+  final _nameController = TextEditingController();
+  final _dateController = TextEditingController();
+  final _salController = TextEditingController();
+
+
+  void _add(BuildContext context, String name, String date,int sal) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    User.add(MI1(name: name, date: date,sal: sal));
+    prefs.setString('User', jsonEncode(User));
+    showSnackBar(context, 'تمت الاضافه');
+  }
+
+
+
+  void showSnackBar(BuildContext context, String message) async {
+    final snackBar = SnackBar(content: Text(message));
+    ScaffoldMessenger.of(context).showSnackBar((snackBar));
+  }
   @override
   // String salary = '';
   // bool x = false;
@@ -30,17 +68,14 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: primaryColor,
         leading: GestureDetector(
           onTap: () {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) => SalaryScreen1(sal: 'll',),
-            //   ),
-            // );
+
             print('ggggg hhhhhhiiii');
             Get.to(SalaryScreen1);
           },
         ),
       ),
+    // if (sal == 0)   {
+    // }
       body:
       Container(
 
@@ -58,17 +93,48 @@ class _HomeScreenState extends State<HomeScreen> {
             ,
           ),
           Container(
-
               padding: EdgeInsets.only(top: 50, left: 50, right: 50),
               alignment: Alignment.center,
               child: TextField(
-                controller: _salary,
+                controller: _salController,
                 decoration: InputDecoration(
                   labelText: 'ادخل راتبك :',
                   fillColor: Colors.white,
                   filled: false,
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 1.0, horizontal: 10),
+                ),
+                keyboardType: TextInputType.number,
+              )),
+          Container(
+
+              padding: EdgeInsets.only(top: 50, left: 50, right: 50),
+              alignment: Alignment.center,
+              child: TextField(
+                controller: _dateController,
+                decoration: InputDecoration(
+                  labelText: 'ادخل تاريخ الراتب  :',
+                  fillColor: Colors.white,
+
+                  filled: false,
+                  contentPadding:
+                  const EdgeInsets.symmetric(vertical: 1.0, horizontal: 10),
+                ),
+                keyboardType: TextInputType.number,
+              )),
+          // DatePickerPage(date: ""),
+          Container(
+
+              padding: EdgeInsets.only(top: 50, left: 50, right: 50),
+              alignment: Alignment.center,
+              child: TextField(
+                controller: _nameController,
+                decoration: InputDecoration(
+                  labelText: 'ادخل اسمك :',
+                  fillColor: Colors.white,
+                  filled: false,
+                  contentPadding:
+                   EdgeInsets.symmetric(vertical: 1.0, horizontal: 10),
                 ),
                 keyboardType: TextInputType.number,
               )),
@@ -84,12 +150,15 @@ class _HomeScreenState extends State<HomeScreen> {
               backgroundColor: primaryColor,
             ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)),
             onPressed: () async {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //       builder: (context) => SalaryScreen1(sal: _salary.text)),
-              Get.to(SalaryScreen1(sal: _salary.text));
+              _add(
+                context,
+                _nameController.text,_dateController.text,
+                int.parse(_salController.text),
+              );
+              // else
+              Get.to(SalaryScreen1(sal: _salController.text,name: _nameController.text,date: _dateController.text,));
             },
-            child: Text('enter'),
+            child: Text('اضافه'),
           ),
           Column(
             children: <Widget>[
@@ -102,7 +171,15 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+  @override
+  void initState() {
+    super.initState();
+    loadMI1();
+  }
 }
+
+
+
 
 // import 'package:flutter/material.dart';
 
