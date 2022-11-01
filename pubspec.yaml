@@ -43,7 +43,8 @@ dependencies:
   shared_preferences: ^2.0.15
   localstorage: ^4.0.0+1
   intl: ^0.17.0
-  
+  google_nav_bar: ^5.0.6
+  line_icons: ^2.0.1
   
     
   

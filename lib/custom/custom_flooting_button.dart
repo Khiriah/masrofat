@@ -10,8 +10,9 @@ class FlootingButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  FloatingActionButton(
+         heroTag: FloatingActionButtonLocation.endFloat,
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10)
+          borderRadius: BorderRadius.circular(50)
       ),
       foregroundColor: Theme.of(context).colorScheme.onPrimary,
       backgroundColor: primaryColor,
@@ -19,8 +20,12 @@ class FlootingButton extends StatelessWidget {
     onPressed: (){
     },
     // onPressed,
+      child: Container(
+        margin: EdgeInsets.all(15.0),
+        child: Icon(Icons.add),
+        color: primaryColor,
+      ),
+      elevation: 4.0,
     );
-
-
   }
 }

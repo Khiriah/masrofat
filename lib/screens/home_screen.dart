@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:masrofat/model/Muser.dart';
 import 'package:masrofat/salary_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'custom/constance.dart';
+
 import 'package:get/get.dart';
 
-import 'custom/date_picker_page.dart';
+import '../base.dart';
+import '../custom/constance.dart';
+
 List<MI1> MIFromJson(String str) =>
     List<MI1>.from(json.decode(str).map((x) => MI1.fromJson(x)));
 class HomeScreen extends StatefulWidget {
@@ -124,7 +126,6 @@ class _HomeScreenState extends State<HomeScreen> {
               )),
           // DatePickerPage(date: ""),
           Container(
-
               padding: EdgeInsets.only(top: 50, left: 50, right: 50),
               alignment: Alignment.center,
               child: TextField(
@@ -156,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 int.parse(_salController.text),
               );
               // else
-              Get.to(SalaryScreen1(sal: _salController.text,name: _nameController.text,date: _dateController.text,));
+              Get.to(Base());
             },
             child: Text('اضافه'),
           ),

@@ -36,7 +36,7 @@ class _DatePickerPageState extends State<DatePickerPage> {
                   onClicked: () {
                     final value = DateFormat('yyyy/MM/dd').format(dateTime);
                     Utils.showSnackBar(context, 'Selected "$value"');
-                    Get.to(SalaryScreen1(date: value,sal: "",name:''));
+                    Get.to(SalaryScreen1());
                     Navigator.pop(context);
                   },
                 ),

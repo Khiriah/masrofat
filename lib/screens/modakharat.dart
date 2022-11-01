@@ -1,21 +1,17 @@
-// import 'dart:html';
 
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 
 import 'package:masrofat/custom/custom_text.dart';
 import 'package:masrofat/salary_screen.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
-import 'custom/constance.dart';
-import 'custom/custom_buttom_social.dart';
-
-import 'home_screen.dart';
-import 'model/MI.dart';
+import '../custom/constance.dart';
+import '../custom/custom_buttom_social.dart';
+import '../model/MI.dart';
 
 class ModkharatScreen extends StatefulWidget {
   String sal;
@@ -94,7 +90,7 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        SalaryScreen1(sal: widget.sal, masraf: widget.m,name: "",date: "",),
+                        SalaryScreen1(),
                   ),
                 );
               },

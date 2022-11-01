@@ -81,22 +81,24 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:masrofat/home_screen.dart';
+
 import 'package:masrofat/salary_screen.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'custom/constance.dart';
-import 'custom/custom_buttom_social.dart';
-import 'custom/custom_flooting_button.dart';
-import 'custom/custom_text.dart';
-import 'model/MI.dart';
+import '../custom/constance.dart';
+import '../custom/custom_buttom_social.dart';
+import '../custom/custom_flooting_button.dart';
+import '../custom/custom_text.dart';
+import '../model/MI.dart';
 
 class EltezamtScreen extends StatefulWidget {
-  String sal;
-  var r;
+  // String sal;
+  // var r;
 
-  EltezamtScreen({Key? key, required this.sal, this.r}) : super(key: key);
+  EltezamtScreen({Key? key
+    // , required this.sal, this.r
+  }) : super(key: key);
 
   @override
   State<EltezamtScreen> createState() => _EltezamtScreenState();
@@ -146,6 +148,72 @@ class _EltezamtScreenState extends State<EltezamtScreen> {
   Widget build(BuildContext context) {
     return Container(
         child: Column(children: [
+
+            Card(
+                margin: const EdgeInsets.only(
+                    top: 50, left: 60, right: 60, bottom: 50),
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                child: Column(children: [
+                  Row(children: [
+                    CustomButtonSocial(
+                      text: 'التزاماتي',
+                      imageName: 'assets/images/Icon.png',
+                      onPress: () {},
+                    ),
+                    SizedBox(
+                      width: 50,
+                    ),
+                    Container(
+                        child: CustomText(
+                      // text: (' ${this.widget.r = int.parse(widget.sal) / 2}'),
+                    ))
+                  ]),
+                  Row(children: [
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Container(
+                        child: CustomText(
+                      text: ("المتبقي من الالتزامات "),
+                    )),
+                    SizedBox(
+                      width: 50,
+                    ),
+                    Container(
+                        child: CustomText(
+                      // text: (' ${this.widget.r = int.parse(widget.sal) / 2}'),
+                    ))
+                  ]),
+                ])),
+            ListView.builder(
+                // return ListView.builder(
+                shrinkWrap: true,
+                itemCount: Il.length,
+                itemBuilder: (BuildContext context, int position) {
+                  return Card(
+                    margin: const EdgeInsets.all(8),
+                    elevation: 2.4,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    child: ListTile(
+                      title: Text(Il[position].title),
+                      subtitle: Text(Il[position].amount.toString()),
+                      trailing: IconButton(
+                        icon: const Icon(
+                          Icons.delete,
+                          color: primaryColor,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _delete(context, position);
+                          });
+                        },
+                      ),
+                    ),
+                  );
+                }),
           FlootingButton(onPressed:    (){setState(() {
             showDialog(
                 context: context,
@@ -224,71 +292,7 @@ class _EltezamtScreenState extends State<EltezamtScreen> {
                   );
                 });
           });},),
-            Card(
-                margin: const EdgeInsets.only(
-                    top: 50, left: 60, right: 60, bottom: 50),
-                elevation: 4,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                child: Column(children: [
-                  Row(children: [
-                    CustomButtonSocial(
-                      text: 'التزاماتي',
-                      imageName: 'assets/images/Icon.png',
-                      onPress: () {},
-                    ),
-                    SizedBox(
-                      width: 50,
-                    ),
-                    Container(
-                        child: CustomText(
-                      text: (' ${this.widget.r = int.parse(widget.sal) / 2}'),
-                    ))
-                  ]),
-                  Row(children: [
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Container(
-                        child: CustomText(
-                      text: ("المتبقي من الالتزامات "),
-                    )),
-                    SizedBox(
-                      width: 50,
-                    ),
-                    Container(
-                        child: CustomText(
-                      text: (' ${this.widget.r = int.parse(widget.sal) / 2}'),
-                    ))
-                  ]),
-                ])),
-            ListView.builder(
-                // return ListView.builder(
-                shrinkWrap: true,
-                itemCount: Il.length,
-                itemBuilder: (BuildContext context, int position) {
-                  return Card(
-                    margin: const EdgeInsets.all(8),
-                    elevation: 2.4,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    child: ListTile(
-                      title: Text(Il[position].title),
-                      subtitle: Text(Il[position].amount.toString()),
-                      trailing: IconButton(
-                        icon: const Icon(
-                          Icons.delete,
-                          color: primaryColor,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _delete(context, position);
-                          });
-                        },
-                      ),
-                    ),
-                  );
-                })
+
           ])
    );
   }

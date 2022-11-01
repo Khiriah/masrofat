@@ -1,17 +1,12 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:masrofat/eltezamat_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'custom/custom_buttom_social.dart';
 import 'custom/custom_text.dart';
-import 'modakharat.dart';
-import 'masrofat_screen.dart';
-import 'custom/constance.dart';
-import 'home_screen.dart';
+import 'screens/modakharat.dart';
+import 'screens/masrofat_screen.dart';
 import 'chart_page.dart';
 import 'package:pie_chart/pie_chart.dart';
-
 import 'model/MI.dart';
 import 'model/Muser.dart';
 
@@ -23,9 +18,12 @@ class SalaryScreen1 extends StatefulWidget {
   var mm;
   var name='';
   var date='';
+  var x;
 
   SalaryScreen1(
-      {Key? key, required this.sal, this.total, this.masraf, this.mod, this.mm,required this.name, required this.date})
+      {Key? key, this.x
+        // , required this.sal, this.total, this.masraf, this.mod, this.mm,required this.name, required this.
+      })
       : super(key: key);
   @override
   State<SalaryScreen1> createState() => _SalaryScreen1State();
@@ -35,6 +33,12 @@ List<MI> MIFromJson(String str) =>
     List<MI>.from(json.decode(str).map((x) => MI.fromJson(x)));
 
 class _SalaryScreen1State extends State<SalaryScreen1> {
+
+  final colorList = <Color>[
+    Colors.greenAccent,
+    Colors.redAccent,
+    Colors.yellowAccent,
+  ];
   late List<chartScreen> data;
   List<MI> masrofat = <MI>[];
   List<MI> modakharat = <MI>[];
@@ -47,10 +51,10 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
 
   double x = 0;
 
-  Map<String, double> dataMap = {
-    "إلتزامات": 0.0,
-    "مصروفات": 0.3,
-    "مدخرات": 0.2,
+  final dataMap = <String, double>{
+    "التزامات %50": 5,
+    "مصروفات %30": 4,
+    "مدخرات %20": 2,
   };
 
   loadMI() async {
@@ -79,33 +83,8 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
-          backgroundColor: primaryColor,
-          title:Text('${widget.name}'),
-          elevation: 0.0,
-          leading: GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
-                ),
-              );
-            },
-          ),
-        ),
-        body: Stack(children: <Widget>[
-          Container(
-            width: 1000,
-            height: 230,
-            decoration: BoxDecoration(
-                color: primaryColor,
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(50),
-                    bottomRight: Radius.circular(50))),
-          ),
+    return  Container(
+        child: Column(children: [
           Column(
             children: [
               Card(
@@ -205,7 +184,7 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                   builder: (context) => MasrofatScreen(
-                                        sal: widget.sal,
+                                        // sal: widget.sal,
                                       )),
                             );
                           },
@@ -233,12 +212,12 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
                         ),
                         TextButton(
                             onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (context) => EltezamtScreen(
-                                          sal: widget.sal,
-                                        )),
-                              );
+                              // Navigator.of(context).push(
+                              //   MaterialPageRoute(
+                              //       builder: (context) => EltezamtScreen(
+                              //             // sal: widget.sal,
+                              //           )),
+                              // );
                             },
                             child: CustomText(text: '  إلتزامات')),
                       ],
@@ -246,19 +225,19 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
                   )
                 ]),
               ),
-              SizedBox(
-                height: 80,
-              ),
-              Container(
-                  padding: EdgeInsets.all(10),
-                  child: Align(
-                    alignment: Alignment.bottomRight,
-                    child: Text('تقرير المصروفات',
-                        style: TextStyle(
-                            fontSize: 13.0,
-                            color: Color.fromARGB(255, 23, 20, 37),
-                            fontWeight: FontWeight.bold)),
-                  )),
+              // SizedBox(
+              //   height: 80,
+              // ),
+              // Container(
+              //     padding: EdgeInsets.all(10),
+              //     child: Align(
+              //       alignment: Alignment.bottomRight,
+              //       child: Text('تقرير المصروفات',
+              //           style: TextStyle(
+              //               fontSize: 13.0,
+              //               color: Color.fromARGB(255, 23, 20, 37),
+              //               fontWeight: FontWeight.bold)),
+              //     )),
               // Container(
               //   child: Row(
               //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -307,34 +286,13 @@ class _SalaryScreen1State extends State<SalaryScreen1> {
                   margin: EdgeInsets.all(10),
                   child: PieChart(
                     dataMap: dataMap,
-                    animationDuration: Duration(milliseconds: 800),
-                    chartLegendSpacing: 15,
-                    chartRadius: MediaQuery.of(context).size.width / 2.4,
-                    // colorList:
-                    initialAngleInDegree: 0,
                     chartType: ChartType.ring,
-                    ringStrokeWidth: 15,
-                    centerText: "",
-                    legendOptions: LegendOptions(
-                      showLegendsInRow: false,
-                      legendPosition: LegendPosition.right,
-
-                      showLegends: true,
-
-                      // legendShape: _BoxShape.circle,
-                      legendTextStyle: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
+                    baseChartColor: Color.fromARGB(255, 44, 43, 43)!.withOpacity(0.15),
+                    colorList: colorList,
+                    chartValuesOptions: const ChartValuesOptions(
+                      showChartValuesInPercentage: true,
                     ),
-                    chartValuesOptions: ChartValuesOptions(
-                      showChartValueBackground: true,
-                      showChartValues: true,
-                      showChartValuesInPercentage: false,
-                      showChartValuesOutside: false,
-                      decimalPlaces: 1,
-                    ),
-                    // gradientList: Colors.red,
-                    // emptyColorGradient: ---Empty Color gradient---
+                    totalValue: 20,
                   ),
                 ),
               )
