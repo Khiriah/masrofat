@@ -12,25 +12,24 @@ import 'model/Muser.dart';
 
 List<MI1> MIFromJson(String str) =>
     List<MI1>.from(json.decode(str).map((x) => MI1.fromJson(x)));
+
 class Base extends StatefulWidget {
   var sal = '';
   var total;
   var masraf;
   var mod;
   var mm;
-  var name='';
-  var date='';
+  var name = '';
+  var date = '';
 
-  Base(
-      {Key? key})
-      : super(key: key);
+  Base({Key? key}) : super(key: key);
   @override
   State<Base> createState() => _BaseState();
 }
 
 class _BaseState extends State<Base> {
-  var name='';
-  var date='';
+  var name = '';
+  var date = '';
   var salary = 0;
   List<MI1> User = <MI1>[];
   loadMI1() async {
@@ -41,12 +40,9 @@ class _BaseState extends State<Base> {
       } catch (e) {}
     });
   }
+
   int _selectedIndex = 0;
-  final screens = [
-    SalaryScreen1(),
-    EltezamtScreen(),
-    MasrofatScreen()
-  ];
+  final screens = [SalaryScreen1(), EltezamtScreen(), MasrofatScreen()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,17 +50,13 @@ class _BaseState extends State<Base> {
         elevation: 0.0,
         toolbarHeight: 200,
         backgroundColor: Color.fromRGBO(248, 248, 248, 1),
-        title: Text(
-          'How to Fluttffer',
-          style: TextStyle(color: Colors.white, fontSize: 28),
-        ),
+        title: _selectedIndex == 0
+            ? AppBarTitleDB()
+            : _selectedIndex == 1
+                ? AppBarTitleI()
+                : AppBarTitleM(),
         centerTitle: true,
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/images/bg_appBar.png'),
-                  fit: BoxFit.fill)),
-        ),
+        flexibleSpace: _selectedIndex == 0 ? AppBarImgDB() : AppBarImg(),
       ),
       body: screens[_selectedIndex], // call the page
       bottomNavigationBar: Container(
@@ -117,9 +109,95 @@ class _BaseState extends State<Base> {
       ),
     );
   }
+
   @override
   void initState() {
     super.initState();
     loadMI1();
+  }
+}
+
+// Dashboard Appbar title
+class AppBarTitleDB extends StatelessWidget {
+  const AppBarTitleDB({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Text(
+        'DB',
+        style: TextStyle(color: Colors.white, fontSize: 28),
+      ),
+    );
+  }
+}
+
+// Iltizamat Appbar title
+class AppBarTitleI extends StatelessWidget {
+  const AppBarTitleI({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Text(
+        'I',
+        style: TextStyle(color: Colors.white, fontSize: 28),
+      ),
+    );
+  }
+}
+
+// Masroofat Appbar title
+class AppBarTitleM extends StatelessWidget {
+  const AppBarTitleM({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Text(
+        'M',
+        style: TextStyle(color: Colors.white, fontSize: 28),
+      ),
+    );
+  }
+}
+
+// Dashboard Appbar img
+class AppBarImgDB extends StatelessWidget {
+  const AppBarImgDB({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('assets/images/bg_appBar.png'),
+              fit: BoxFit.fill)),
+    );
+  }
+}
+
+// Dashboard Appbar img
+class AppBarImg extends StatelessWidget {
+  const AppBarImg({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('assets/images/bg_appBar.png'),
+              fit: BoxFit.fill)),
+    );
   }
 }
