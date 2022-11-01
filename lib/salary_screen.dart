@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'custom/constance.dart';
 import 'custom/custom_buttom_social.dart';
 import 'custom/custom_text.dart';
 import 'screens/modakharat.dart';
@@ -35,9 +36,9 @@ List<MI> MIFromJson(String str) =>
 class _SalaryScreen1State extends State<SalaryScreen1> {
 
   final colorList = <Color>[
-    Colors.greenAccent,
-    Colors.redAccent,
-    Colors.yellowAccent,
+    primaryColor2,
+    primaryColor3,
+    primaryColor4,
   ];
   late List<chartScreen> data;
   List<MI> masrofat = <MI>[];

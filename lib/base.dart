@@ -51,17 +51,20 @@ class _BaseState extends State<Base> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // title: Text(
-        //   'How to Flutter',
-        //   style: TextStyle(color: Colors.white, fontSize: 28),
-        // ),
-        // centerTitle: true,
-        // flexibleSpace: Container(
-        //   decoration: BoxDecoration(
-        //       image: DecorationImage(
-        //           image: AssetImage('assets/images/bg_appBar.png'),
-        //           fit: BoxFit.fill)),
-        // ),
+        elevation: 0.0,
+        toolbarHeight: 200,
+        backgroundColor: Color.fromRGBO(248, 248, 248, 1),
+        title: Text(
+          'How to Fluttffer',
+          style: TextStyle(color: Colors.white, fontSize: 28),
+        ),
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/bg_appBar.png'),
+                  fit: BoxFit.fill)),
+        ),
       ),
       body: screens[_selectedIndex], // call the page
       bottomNavigationBar: Container(
