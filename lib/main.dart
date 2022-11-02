@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:masrofat/screens/home_screen.dart';
+import 'package:masrofat/screens/splash.dart';
 import 'model/Muser.dart';
 
 void main() {
@@ -41,9 +42,7 @@ class _MyAppState extends State<MyApp> {
 // loadMI1();
 //     if(User[0].sal==0){
     return GetMaterialApp(
-      home: HomeScreen(
-        sal: widget,
-      ),
+      home: Splash(),
     );
     //   } return GetMaterialApp(
     //     // home: SalaryScreen1(sal: User[index].sal.toString(), name:User[index].name,date:User[index].date),

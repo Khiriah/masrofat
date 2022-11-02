@@ -101,7 +101,11 @@ class _EltezamtScreenState extends State<EltezamtScreen> {
               ))
             ]),
           ])),
-      ListView.builder(
+
+    Container(
+      width: 500,
+    height: 400,
+    child: ListView.builder(
           // return ListView.builder(
           shrinkWrap: true,
           itemCount: Il.length,
@@ -127,7 +131,7 @@ class _EltezamtScreenState extends State<EltezamtScreen> {
                 ),
               ),
             );
-          }),
+          }),),
       TextButton(
           onPressed: () {
             print('hi');
@@ -210,7 +214,8 @@ class _EltezamtScreenState extends State<EltezamtScreen> {
                   });
             });
           },
-          child: Text('اضافة التزام'))
+          child: Text('اضافة التزام')),
+
     ]));
   }
 

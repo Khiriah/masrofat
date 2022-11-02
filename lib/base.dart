@@ -22,7 +22,7 @@ class Base extends StatefulWidget {
   var name = '';
   var date = '';
 
-  Base({Key? key, required this.sal}) : super(key: key);
+  Base({Key? key, required this.sal, required this.name}) : super(key: key);
   @override
   State<Base> createState() => _BaseState();
 }
@@ -43,10 +43,10 @@ class _BaseState extends State<Base> {
 
   int _selectedIndex = 0;
   get screens => [
-        SalaryScreen1(sal: widget.sal),
-        EltezamtScreen(sal: widget.sal),
-        MasrofatScreen(sal: widget.sal)
-      ];
+    SalaryScreen1(sal: widget.sal),
+    EltezamtScreen(sal: widget.sal),
+    MasrofatScreen(sal: widget.sal)
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,10 +55,12 @@ class _BaseState extends State<Base> {
         toolbarHeight: 200,
         backgroundColor: Color.fromRGBO(248, 248, 248, 1),
         title: _selectedIndex == 0
-            ? AppBarTitleDB()
+            ? AppBarTitleDB(
+          name: widget.name,
+        )
             : _selectedIndex == 1
-                ? AppBarTitleI()
-                : AppBarTitleM(),
+            ? AppBarTitleI()
+            : AppBarTitleM(),
         centerTitle: true,
         flexibleSpace: _selectedIndex == 0 ? AppBarImgDB() : AppBarImg(),
       ),
@@ -123,16 +125,15 @@ class _BaseState extends State<Base> {
 
 // Dashboard Appbar title
 class AppBarTitleDB extends StatelessWidget {
-  const AppBarTitleDB({
-    Key? key,
-  }) : super(key: key);
+  var name;
+  AppBarTitleDB({Key? key, required this.name}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Text(
-        '',
-        style: TextStyle(color: Colors.white, fontSize: 28),
+        'اهلاً ${this.name}',
+        style: TextStyle(color: Colors.white, fontSize: 18),
       ),
     );
   }
@@ -148,7 +149,7 @@ class AppBarTitleI extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Text(
-        'I',
+        'إلتزاماتي',
         style: TextStyle(color: Colors.white, fontSize: 28),
       ),
     );
@@ -165,7 +166,7 @@ class AppBarTitleM extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Text(
-        'M',
+        'مصروفاتي',
         style: TextStyle(color: Colors.white, fontSize: 28),
       ),
     );

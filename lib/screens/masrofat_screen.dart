@@ -108,7 +108,11 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
               ))
             ]),
           ])),
-      ListView.builder(
+    Container(
+    width: 500,
+    height: 400,
+
+    child:ListView.builder(
           // return ListView.builder(
           shrinkWrap: true,
           itemCount: masrofat.length,
@@ -134,7 +138,7 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
                 ),
               ),
             );
-          }),
+          }),),
       TextButton(
           onPressed: () {
             print('hi');
@@ -217,7 +221,7 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
                   });
             });
           },
-          child: Text('اضافة التزام'))
+          child: Text('اضافة مصروف'))
     ]));
   }
 

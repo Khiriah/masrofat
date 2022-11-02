@@ -15,14 +15,14 @@ List<MI1> MIFromJson(String str) =>
 
 class HomeScreen extends StatefulWidget {
   var sal;
-  HomeScreen({Key? key, required this.sal}) : super(key: key);
+  var name;
+  HomeScreen({Key? key, required this.sal,required this.name}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  TextEditingController _salary = new TextEditingController();
   List<MI1> User = <MI1>[];
 
   get i => null;
@@ -63,38 +63,30 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
-        elevation: 0.0,
-        backgroundColor: primaryColor,
-        leading: GestureDetector(
-          onTap: () {
-            print('ggggg hhhhhhiiii');
-            Get.to(SalaryScreen1);
-          },
-        ),
-      ),
-      // if (sal == 0)   {
-      // }
+
       body: Container(
         child: Column(children: [
-          Container(
-            width: 1000,
-            height: 150,
-            decoration: BoxDecoration(
-                color: primaryColor,
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(50),
-                    bottomRight: Radius.circular(50))),
-          ),
+          Container(height: 100,width: 500,),
+        Container(
+          height: 200,
+            width: 200,
+            child:
+           Image.asset('assets/images/img_1.png'),
+        ),
           Container(
               padding: EdgeInsets.only(top: 50, left: 50, right: 50),
               alignment: Alignment.center,
               child: TextField(
                 controller: _salController,
                 decoration: InputDecoration(
+                  enabledBorder: UnderlineInputBorder(
+                    // borderRadius: BorderRadius(8)
+                    borderSide: BorderSide(color: primaryColor1)
+                  ),
+
                   labelText: 'ادخل راتبك :',
                   fillColor: Colors.white,
+
                   filled: false,
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 1.0, horizontal: 10),
@@ -110,6 +102,10 @@ class _HomeScreenState extends State<HomeScreen> {
               child: TextField(
                 controller: _dateController,
                 decoration: InputDecoration(
+                  enabledBorder: UnderlineInputBorder(
+                    // borderRadius: BorderRadius(8)
+                      borderSide: BorderSide(color: primaryColor1)
+                  ),
                   labelText: 'ادخل تاريخ الراتب  :',
                   fillColor: Colors.white,
                   filled: false,
@@ -122,12 +118,19 @@ class _HomeScreenState extends State<HomeScreen> {
           Container(
               padding: EdgeInsets.only(top: 50, left: 50, right: 50),
               alignment: Alignment.center,
-              child: TextField(
+              child: TextFormField(
                 controller: _nameController,
+                onChanged: (value) {
+                  widget.name = value;
+                },
                 decoration: InputDecoration(
+                  enabledBorder: UnderlineInputBorder(
+                    // borderRadius: BorderRadius(8)
+                      borderSide: BorderSide(color: primaryColor1)
+                  ),
                   labelText: 'ادخل اسمك :',
+
                   fillColor: Colors.white,
-                  filled: false,
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 1.0, horizontal: 10),
                 ),
@@ -154,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
               // else
               print('sssssaaalaryyyy ${_salController.text}');
               Get.to(Base(
-                sal: widget.sal,
+                sal: widget.sal,name:widget.name
               ));
             },
             child: Text('اضافه'),
