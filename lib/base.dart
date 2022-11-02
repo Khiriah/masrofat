@@ -14,7 +14,7 @@ List<MI1> MIFromJson(String str) =>
     List<MI1>.from(json.decode(str).map((x) => MI1.fromJson(x)));
 
 class Base extends StatefulWidget {
-  var sal = '';
+  var sal;
   var total;
   var masraf;
   var mod;
@@ -22,7 +22,7 @@ class Base extends StatefulWidget {
   var name = '';
   var date = '';
 
-  Base({Key? key}) : super(key: key);
+  Base({Key? key, required this.sal}) : super(key: key);
   @override
   State<Base> createState() => _BaseState();
 }
@@ -42,7 +42,11 @@ class _BaseState extends State<Base> {
   }
 
   int _selectedIndex = 0;
-  final screens = [SalaryScreen1(), EltezamtScreen(), MasrofatScreen()];
+  get screens => [
+        SalaryScreen1(sal: widget.sal),
+        EltezamtScreen(sal: widget.sal),
+        MasrofatScreen(sal: widget.sal)
+      ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,7 +131,7 @@ class AppBarTitleDB extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Text(
-        'DB',
+        '',
         style: TextStyle(color: Colors.white, fontSize: 28),
       ),
     );

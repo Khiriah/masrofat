@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:easy_splash_screen/easy_splash_screen.dart';
-import 'package:masrofat/screens/base.dart';
+import 'package:masrofat/base.dart';
 
 class Splash extends StatefulWidget {
   Splash({Key? key}) : super(key: key);
@@ -17,7 +17,9 @@ class _SplashState extends State<Splash> {
       logoWidth: 200,
       backgroundImage: AssetImage('assets/images/bg_splash.png'),
       backgroundColor: Color.fromRGBO(88, 161, 184, 1),
-      navigator: Base(),
+      navigator: Base(
+        sal: widget,
+      ),
       showLoader: false,
       durationInSeconds: 3,
     );

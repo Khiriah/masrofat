@@ -36,13 +36,14 @@ class _MyAppState extends State<MyApp> {
   //   });
   // }
 
-
   @override
   Widget build(BuildContext context) {
 // loadMI1();
 //     if(User[0].sal==0){
     return GetMaterialApp(
-      home: HomeScreen(),
+      home: HomeScreen(
+        sal: widget,
+      ),
     );
     //   } return GetMaterialApp(
     //     // home: SalaryScreen1(sal: User[index].sal.toString(), name:User[index].name,date:User[index].date),
@@ -56,5 +57,4 @@ class _MyAppState extends State<MyApp> {
     //   loadMI1();
     // }
   }
-
 }

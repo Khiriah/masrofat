@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:masrofat/custom/constance.dart';
+import 'package:masrofat/custom/custom_button.dart';
 
 import 'package:masrofat/salary_screen.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -14,19 +15,17 @@ import '../custom/custom_flooting_button.dart';
 import '../custom/custom_text.dart';
 import '../model/MI.dart';
 
+List<MI> MIFromJson(String str) =>
+    List<MI>.from(json.decode(str).map((x) => MI.fromJson(x)));
+
 class MasrofatScreen extends StatefulWidget {
-  // String sal;
-  // var m;
-  MasrofatScreen({Key? key
-    // , required this.sal, this.m
-  }) : super(key: key);
+  String sal;
+  var m;
+  MasrofatScreen({Key? key, required this.sal, this.m}) : super(key: key);
 
   @override
   State<MasrofatScreen> createState() => _MasrofatScreenState();
 }
-
-List<MI> MIFromJson(String str) =>
-    List<MI>.from(json.decode(str).map((x) => MI.fromJson(x)));
 
 class _MasrofatScreenState extends State<MasrofatScreen> {
   List<MI> masrofat = <MI>[];
@@ -45,7 +44,7 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
 
   void _add(BuildContext context, String masrofat1, int amount) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    masrofat.add(MI(title: masrofat1, amount: amount, kind: "masrofat"));
+    masrofat.add(MI(title: masrofat1, amount: amount));
     prefs.setString('Masrofat', jsonEncode(masrofat));
 
     showSnackBar(context, 'تمت الاضافه');
@@ -71,10 +70,9 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
   Widget build(BuildContext context) {
     return Container(
         child: Column(children: [
-
       Card(
           margin:
-              const EdgeInsets.only(top: 50, left: 60, right: 60, bottom: 50),
+              const EdgeInsets.only(top: 1, left: 60, right: 60, bottom: 50),
           elevation: 4,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -90,7 +88,7 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
               ),
               Container(
                   child: CustomText(
-                // text: (' ${this.widget.m = int.parse(widget.sal) * 30 / 100}'),
+                text: ('${this.widget.m = int.parse(widget.sal) * 30 / 100}'),
               ))
             ]),
             Row(children: [
@@ -106,7 +104,7 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
               ),
               Container(
                   child: CustomText(
-                // text: (' ${this.widget.m = int.parse(widget.sal) * 30 / 100}'),
+                text: (' ${this.widget.m = int.parse(widget.sal) * 30 / 100}'),
               ))
             ]),
           ])),
@@ -137,88 +135,89 @@ class _MasrofatScreenState extends State<MasrofatScreen> {
               ),
             );
           }),
-          FlootingButton(
-            onPressed: () {
-              setState(() {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                        content: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomText(
-                                text: "إضافة مصروف جديد",
-                              ),
-                              TextFormField(
-                                controller: _titleController,
-                                decoration: const InputDecoration(
-                                    hintText: " ",
-                                    border: UnderlineInputBorder(),
-                                    labelText: 'المصروف'),
-                                onChanged: (String value) {},
-                              ),
-                              TextFormField(
-                                controller: _amuntController,
-                                keyboardType: TextInputType.number,
-                                decoration: const InputDecoration(
-                                    hintText: " ",
-                                    border: UnderlineInputBorder(),
-                                    labelText: 'قيمة المصروف'),
-                                onChanged: (String value) {},
-                              ),
-                            ]),
-                        actions: <Widget>[
-                          TextButton(
-                              onPressed: Navigator.of(context).pop,
-                              child: const Text('إلغاء')),
-                          TextButton(
-                            onPressed: () {
-                              setState(() {
-                                if (_titleController.text.isEmpty ||
-                                    _amuntController.text.isEmpty) {
-                                  showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return const AlertDialog(
-                                          icon: Icon(
-                                            Icons.error,
-                                            color: Colors.red,
+      TextButton(
+          onPressed: () {
+            print('hi');
+            setState(() {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomText(
+                              text: "إضافة مصروف جديد",
+                            ),
+                            TextFormField(
+                              controller: _titleController,
+                              decoration: const InputDecoration(
+                                  hintText: " ",
+                                  border: UnderlineInputBorder(),
+                                  labelText: 'المصروفات'),
+                              onChanged: (String value) {},
+                            ),
+                            TextFormField(
+                              controller: _amuntController,
+                              keyboardType: TextInputType.number,
+                              decoration: const InputDecoration(
+                                  hintText: " ",
+                                  border: UnderlineInputBorder(),
+                                  labelText: 'قيمة المصروفات'),
+                              onChanged: (String value) {},
+                            ),
+                          ]),
+                      actions: <Widget>[
+                        TextButton(
+                            onPressed: Navigator.of(context).pop,
+                            child: const Text('إلغاء')),
+                        TextButton(
+                          onPressed: () {
+                            setState(() {
+                              if (_titleController.text.isEmpty ||
+                                  _amuntController.text.isEmpty) {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return const AlertDialog(
+                                        icon: Icon(
+                                          Icons.error,
+                                          color: Colors.red,
+                                        ),
+                                        title: Text(
+                                          "الرجاء إكمال المطلوب ",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 22,
                                           ),
-                                          title: Text(
-                                            "الرجاء إكمال المطلوب ",
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 22,
-                                            ),
-                                          ),
-                                        );
-                                      });
-                                } else {
-                                  // print(
-                                  //   reason,
-                                  // );
-                                  _add(
-                                    context,
-                                    _titleController.text,
-                                    int.parse(_amuntController.text),
-                                  );
+                                        ),
+                                      );
+                                    });
+                              } else {
+                                // print(
+                                //   reason,
+                                // );
+                                _add(
+                                  context,
+                                  _titleController.text,
+                                  int.parse(_amuntController.text),
+                                );
 
-                                  Navigator.pop(context);
-                                }
-                              });
-                            },
-                            child: const Text("إضافة"),
-                          ),
-                        ],
-                      );
-                    });
-              });
-            },
-          ),
+                                Navigator.pop(context);
+                              }
+                            });
+                          },
+                          child: const Text("إضافة"),
+                        ),
+                      ],
+                    );
+                  });
+            });
+          },
+          child: Text('اضافة التزام'))
     ]));
   }
 

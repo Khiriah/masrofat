@@ -12,8 +12,10 @@ import '../custom/constance.dart';
 
 List<MI1> MIFromJson(String str) =>
     List<MI1>.from(json.decode(str).map((x) => MI1.fromJson(x)));
+
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  var sal;
+  HomeScreen({Key? key, required this.sal}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -30,7 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       try {
         User = MIFromJson(prefs.getString("User")!);
-
       } catch (e) {}
     });
   }
@@ -39,20 +40,18 @@ class _HomeScreenState extends State<HomeScreen> {
   final _dateController = TextEditingController();
   final _salController = TextEditingController();
 
-
-  void _add(BuildContext context, String name, String date,int sal) async {
+  void _add(BuildContext context, String name, String date, int sal) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    User.add(MI1(name: name, date: date,sal: sal));
+    User.add(MI1(name: name, date: date, sal: sal));
     prefs.setString('User', jsonEncode(User));
     showSnackBar(context, 'تمت الاضافه');
   }
-
-
 
   void showSnackBar(BuildContext context, String message) async {
     final snackBar = SnackBar(content: Text(message));
     ScaffoldMessenger.of(context).showSnackBar((snackBar));
   }
+
   @override
   // String salary = '';
   // bool x = false;
@@ -70,29 +69,23 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: primaryColor,
         leading: GestureDetector(
           onTap: () {
-
             print('ggggg hhhhhhiiii');
             Get.to(SalaryScreen1);
           },
         ),
       ),
-    // if (sal == 0)   {
-    // }
-      body:
-      Container(
-
+      // if (sal == 0)   {
+      // }
+      body: Container(
         child: Column(children: [
           Container(
             width: 1000,
             height: 150,
-
             decoration: BoxDecoration(
                 color: primaryColor,
                 borderRadius: BorderRadius.only(
-                    bottomLeft:Radius.circular(50) ,bottomRight: Radius.circular(50)
-                )
-            )
-            ,
+                    bottomLeft: Radius.circular(50),
+                    bottomRight: Radius.circular(50))),
           ),
           Container(
               padding: EdgeInsets.only(top: 50, left: 50, right: 50),
@@ -107,9 +100,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       const EdgeInsets.symmetric(vertical: 1.0, horizontal: 10),
                 ),
                 keyboardType: TextInputType.number,
+                onChanged: (value) {
+                  widget.sal = value;
+                },
               )),
           Container(
-
               padding: EdgeInsets.only(top: 50, left: 50, right: 50),
               alignment: Alignment.center,
               child: TextField(
@@ -117,10 +112,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 decoration: InputDecoration(
                   labelText: 'ادخل تاريخ الراتب  :',
                   fillColor: Colors.white,
-
                   filled: false,
                   contentPadding:
-                  const EdgeInsets.symmetric(vertical: 1.0, horizontal: 10),
+                      const EdgeInsets.symmetric(vertical: 1.0, horizontal: 10),
                 ),
                 keyboardType: TextInputType.number,
               )),
@@ -135,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   fillColor: Colors.white,
                   filled: false,
                   contentPadding:
-                   EdgeInsets.symmetric(vertical: 1.0, horizontal: 10),
+                      EdgeInsets.symmetric(vertical: 1.0, horizontal: 10),
                 ),
                 keyboardType: TextInputType.number,
               )),
@@ -153,11 +147,15 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () async {
               _add(
                 context,
-                _nameController.text,_dateController.text,
+                _nameController.text,
+                _dateController.text,
                 int.parse(_salController.text),
               );
               // else
-              Get.to(Base());
+              print('sssssaaalaryyyy ${_salController.text}');
+              Get.to(Base(
+                sal: widget.sal,
+              ));
             },
             child: Text('اضافه'),
           ),
@@ -172,6 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
   @override
   void initState() {
     super.initState();

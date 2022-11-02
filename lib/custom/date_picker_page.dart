@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,9 +10,7 @@ import 'button_widget.dart';
 
 class DatePickerPage extends StatefulWidget {
   var date;
-  DatePickerPage(
-      {Key? key, required this.date})
-      : super(key: key);
+  DatePickerPage({Key? key, required this.date}) : super(key: key);
   @override
   _DatePickerPageState createState() => _DatePickerPageState();
 }
@@ -36,8 +33,8 @@ class _DatePickerPageState extends State<DatePickerPage> {
                   onClicked: () {
                     final value = DateFormat('yyyy/MM/dd').format(dateTime);
                     Utils.showSnackBar(context, 'Selected "$value"');
-                    Get.to(SalaryScreen1());
-                    Navigator.pop(context);
+                    // Get.to(SalaryScreen1))
+                    // Navigator.pop(context);
                   },
                 ),
               ),

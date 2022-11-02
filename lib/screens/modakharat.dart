@@ -1,9 +1,7 @@
-
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 
 import 'package:masrofat/custom/custom_text.dart';
 import 'package:masrofat/salary_screen.dart';
@@ -30,8 +28,6 @@ List<MI> MIFromJson(String str) =>
 class _ModkharatScreenState extends State<ModkharatScreen> {
   List<MI> modakharat = <MI>[];
 
-
-
   loadMI() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -55,7 +51,7 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
   // }
   void _add(BuildContext context, String masrofat1, int amount) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    modakharat.add(MI(title: masrofat1, amount: amount,kind: "modakharat"));
+    modakharat.add(MI(title: masrofat1, amount: amount));
     prefs.setString('Masrofat', jsonEncode(modakharat));
 
     showSnackBar(context, 'تمت الاضافه');
@@ -67,7 +63,7 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     modakharat.removeAt(pos);
     prefs.setString('Modakharat', jsonEncode(modakharat));
-    showSnackBar(context, 'تم مسح هدفك ');
+    showSnackBar(context, 'تم المسح  ');
     _titleController.clear();
     _amuntController.clear();
   }
@@ -89,8 +85,9 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        SalaryScreen1(),
+                    builder: (context) => SalaryScreen1(
+                      sal: widget.sal,
+                    ),
                   ),
                 );
               },
@@ -99,8 +96,7 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                 color: Colors.white,
               )),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation
-            .centerDocked,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         //specify the location of the FAB
         floatingActionButton: FloatingActionButton(
           backgroundColor: primaryColor,
@@ -139,9 +135,7 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                         ]),
                     actions: <Widget>[
                       TextButton(
-                          onPressed: Navigator
-                              .of(context)
-                              .pop,
+                          onPressed: Navigator.of(context).pop,
                           child: const Text('إلغاء')),
                       TextButton(
                         onPressed: () {
@@ -244,10 +238,9 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                     ),
                     Container(
                         child: CustomText(
-                          text:
-                          (' ${this.widget.m =
-                              int.parse(widget.sal) * 20 / 100}'),
-                        ))
+                      text:
+                          (' ${this.widget.m = int.parse(widget.sal) * 20 / 100}'),
+                    ))
                   ]),
                   Row(children: [
                     SizedBox(
@@ -255,21 +248,20 @@ class _ModkharatScreenState extends State<ModkharatScreen> {
                     ),
                     Container(
                         child: CustomText(
-                          text: ("المتبقي من المدخرات "),
-                        )),
+                      text: ("المتبقي من المدخرات "),
+                    )),
                     SizedBox(
                       width: 50,
                     ),
                     Container(
                         child: CustomText(
-                          text:
-                          (' ${this.widget.m =
-                              int.parse(widget.sal) * 20 / 100}'),
-                        ))
+                      text:
+                          (' ${this.widget.m = int.parse(widget.sal) * 20 / 100}'),
+                    ))
                   ]),
                 ])),
             ListView.builder(
-              // return ListView.builder(
+                // return ListView.builder(
                 shrinkWrap: true,
                 itemCount: modakharat.length,
                 itemBuilder: (BuildContext context, int position) {
